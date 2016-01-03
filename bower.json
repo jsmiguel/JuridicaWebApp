@@ -4,7 +4,7 @@
     "Jose Miguel Garcia <js.miguel@outlook.com>"
   ],
   "description": "Gestion de práctica juridica",
-  "main": "app.js",
+  "main": "server/server.js",
   "moduleType": [
     "amd"
   ],

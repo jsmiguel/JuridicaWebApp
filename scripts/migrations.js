@@ -1,5 +1,6 @@
 var app = require('../server/server');
 var ds = app.dataSources.mysqlds;
+var lbTables = [];
 
 lbTables = [
 	'Usuario',
@@ -25,7 +26,8 @@ ds.setMaxListeners(0);
 
 ds.automigrate(lbTables, function(er) {
   if (er) throw er;
-  console.log('Loopback tables [' + lbTables + '] created in ', ds.adapter.name);
+  console.log('Loopback tables [' + lbTables + ']');
+  console.log('Created in ', ds.adapter.name);
   ds.disconnect();
 
   process.exit();

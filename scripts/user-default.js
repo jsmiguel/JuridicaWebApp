@@ -6,7 +6,7 @@ var Cuenta = app.models.Cuenta;
 var Rol = app.models.Rol;
 
 //JSON File
-var roles = require("./data/roles.json");
+var roles = require('./data/roles.json');
 
 //Generador de contraseña
 var pass = generatePassword(6);
