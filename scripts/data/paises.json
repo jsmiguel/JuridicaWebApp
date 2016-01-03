@@ -1,0 +1,47 @@
+[  
+   {  
+      "nombre":"Estados Unidos",
+      "nacionalidad":"Estadounidense",
+      "esActivo":true
+   },
+   {  
+      "nombre":"Canada",
+      "nacionalidad":"Canadiense",
+      "esActivo":true
+   },
+   {  
+      "nombre":"México",
+      "nacionalidad":"Mexicano",
+      "esActivo":true
+   },
+   {  
+      "nombre":"Guatemala",
+      "nacionalidad":"Guatemalteco",
+      "esActivo":true
+   },
+   {  
+      "nombre":"El Salvador",
+      "nacionalidad":"Salvadoreño",
+      "esActivo":true
+   },
+   {  
+      "nombre":"Honduras",
+      "nacionalidad":"Hondureño",
+      "esActivo":true
+   },
+   {  
+      "nombre":"Costa Rica",
+      "nacionalidad":"Costarricense",
+      "esActivo":true
+   },
+   {  
+      "nombre":"Panamá",
+      "nacionalidad":"Panameño",
+      "esActivo":true
+   },
+   {  
+      "nombre":"Nicaragüa",
+      "nacionalidad":"Nicaragüense",
+      "esActivo":true
+   }
+]

@@ -1,0 +1,54 @@
+<div class="ui page">
+	<h3 class="ui dividing header">Expedientes</h3>
+	<table class="ui unstackable striped table">
+        <thead>
+        	<tr>
+        		<th># Expediente</th>
+        		<th>Nombres (Practicante)</th>
+                <th>Apellidos (Practicante)</th> 
+        		<th>Descripción</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Opciones</th>
+        	</tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="expediente in expedientes">
+            	<td>
+                    {{expediente.id}}
+                </td>
+                <td>
+                    {{expediente.practicante.nombres}}
+                </td>
+                <td>
+                    {{expediente.practicante.apellidos}}
+                </td>
+                <td>
+                    {{expediente.solicitud.descripcionProblema}}
+                </td>
+                <td>
+                    {{expediente.createdAt | date : 'dd/MM/yyyy'}}
+                </td>
+                <td>
+                    {{expediente.estado.nombre}}
+                </td>
+                <td>
+                    <i class="search icon link" ng-click="detalleExpediente(expediente.id)">
+                        <md-tooltip md-direction="bottom">
+                            Detalle
+                        </md-tooltip>
+                    </i>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot class="full-width">
+            <tr>
+              <th colspan="7"
+                 <div class="ui">
+                  Total de registros: {{ expedientes.length }}
+                </div> 
+              </th>
+            </tr>
+        </tfoot>
+    </table>
+</div>

@@ -1,0 +1,14 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "mysqlds": {
+    "host": "localhost",
+    "database": "juridica",
+    "password": "",
+    "name": "mysqlds",
+    "connector": "mysql",
+    "user": "root"
+  }
+}

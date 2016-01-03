@@ -1,0 +1,92 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "User": {
+    "dataSource": "mysqlds",
+    "public": false
+  },
+  "AccessToken": {
+    "dataSource": "mysqlds",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "mysqlds",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "mysqlds",
+    "public": false
+  },
+  "Role": {
+    "dataSource": "mysqlds",
+    "public": false
+  },
+  "Usuario": {
+    "dataSource": "mysqlds",
+    "public": true
+  },
+  "Solicitud": {
+    "dataSource": "mysqlds",
+    "public": true
+  },
+  "Cuenta": {
+    "dataSource": "mysqlds",
+    "public": true
+  },
+  "Colaborador": {
+    "dataSource": "mysqlds",
+    "public": true
+  },
+  "Expediente": {
+    "dataSource": "mysqlds",
+    "public": true
+  },
+  "Practicante": {
+    "dataSource": "mysqlds",
+    "public": true
+  },
+  "Servicio": {
+    "dataSource": "mysqlds",
+    "public": true
+  },
+  "Motivo": {
+    "dataSource": "mysqlds",
+    "public": true
+  },
+  "Area": {
+    "dataSource": "mysqlds",
+    "public": true
+  },
+  "TipoDocumento": {
+    "dataSource": "mysqlds",
+    "public": true
+  },
+  "EstadoCivil": {
+    "dataSource": "mysqlds",
+    "public": true
+  },
+  "Pais": {
+    "dataSource": "mysqlds",
+    "public": true
+  },
+  "Evento": {
+    "dataSource": "mysqlds",
+    "public": true
+  },
+  "Rol": {
+    "dataSource": "mysqlds",
+    "public": true
+  }
+}

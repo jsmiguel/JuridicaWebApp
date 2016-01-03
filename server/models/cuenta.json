@@ -1,0 +1,43 @@
+{
+  "name": "Cuenta",
+  "description": "Cuenta de autentificación",
+  "plural": "Cuentas",
+  "base": "User",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "esActivo": {
+      "type": "boolean"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "practicante": {
+      "type": "hasOne",
+      "model": "Practicante",
+      "foreignKey": ""
+    },
+    "colaborador": {
+      "type": "hasOne",
+      "model": "Colaborador",
+      "foreignKey": ""
+    },
+    "rol": {
+      "type": "belongsTo",
+      "model": "Rol",
+      "foreignKey": ""
+    }
+  },
+  "acls": [
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "*"
+    }
+  ],
+  "methods": {}
+}

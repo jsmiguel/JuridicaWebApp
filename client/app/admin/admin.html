@@ -1,0 +1,151 @@
+<div class="ui page">
+    <div>
+        <h3 class="ui dividing header">Administrar</h3>
+
+        <div layout-padding layout="row" layout-wrap layout-align="center start" layout-xs="column">
+            <div flex="60" flex-xs="100" layout="column">
+                <md-card class="md-padding">
+                    <md-card-header>
+                      <md-card-header-text>
+                        <md-icon>face</md-icon>
+                        <span class="ui header md-title">Asesores</span>
+                        <div class="ui transparent icon input" style="float:right">
+                          <input type="text" ng-model="searchAsesor" placeholder="Buscar...">
+                          <i class="search icon"></i>
+                        </div>
+                      </md-card-header-text>
+                    </md-card-header>
+                    <md-card-content>
+                        <table class="ui very basic single line table">
+                          <thead>
+                            <tr>
+                                <th>Carnet</th>
+                                <th>Nombres</th>
+                                <th>Apellidos</th>
+                                <th>Estado</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr ng-repeat="asesor in asesores | filter:searchAsesor">
+                              <td>{{asesor.username}}</td>
+                              <td>{{asesor.colaborador.nombres}}</td>
+                              <td>{{asesor.colaborador.apellidos}}</td>
+                              <td>
+                                  <button 
+                                    class="ui mini button"
+                                    ng-class="{true:'positive', false:''}[asesor.esActivo]"
+                                    ng-click="vm.changeStatusAccount(asesor);">
+                                    {{asesor.esActivo ? 'Activo' : 'Inactivo'}}
+                                  </button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                    </md-card-content>
+                    <md-card-actions layout="row" layout-align="end center">
+                      <md-button ng-click="vm.addColaborador($event, 'asesor')">Agregar</md-button>
+                    </md-card-actions>
+                </md-card>
+                <md-card class="md-padding">
+                    <md-card-header>
+                      <md-card-header-text>
+                        <md-icon>face</md-icon>
+                        <span class="ui header md-title">Coordinadores</span>
+                        <div class="ui transparent icon input" style="float:right">
+                          <input type="text" ng-model="searchCoordinador" placeholder="Buscar...">
+                          <i class="search icon"></i>
+                        </div>
+                      </md-card-header-text>
+                    </md-card-header>
+                    <md-card-content>
+                      <table class="ui very basic single line table">
+                          <thead>
+                            <tr>
+                                <th>Carnet</th>
+                                <th>Nombres</th>
+                                <th>Apellidos</th>
+                                <th>Estado</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr ng-repeat="item in coordinadores | filter:searchCoordinador">
+                              <td>{{item.username}}</td>
+                              <td>{{item.colaborador.nombres}}</td>
+                              <td>{{item.colaborador.apellidos}}</td>
+                              <td>                              
+                                  <button 
+                                    class="ui mini button"
+                                    ng-class="{true:'positive', false:''}[item.esActivo]"
+                                    ng-click="vm.changeStatusAccount(item);">
+                                    {{item.esActivo ? 'Activo' : 'Inactivo'}}
+                                  </button>
+                              </td>
+                            </tr>
+                          </tbody>
+                      </table>
+                    </md-card-content>
+                    <md-card-actions layout="row" layout-align="end center">
+                      <md-button ng-click="vm.addColaborador($event, 'coordinador')">Agregar</md-button>
+                    </md-card-actions>
+                </md-card>
+            </div>
+            <div flex="40" flex-xs="100" layout="column">
+                <md-card class="md-padding">
+                    <md-card-header>
+                      <md-card-header-text>
+                        <md-icon>bookmark</md-icon>
+                        <span class="ui header md-title">Tipos de documento</span>
+                      </md-card-header-text>
+                    </md-card-header>
+                    <md-card-content>
+                        <table class="ui very basic single line stackable table">
+                            <tbody>
+                                <tr ng-repeat="item in tiposDocumento">
+                                  <td>{{item.nombre}}</td>
+                                  <td class="right aligned">
+                                    <button 
+                                        class="ui mini button"
+                                        ng-class="{true:'positive', false:''}[item.esActivo]"
+                                        ng-click="vm.changeStatus(item);">
+                                        {{item.esActivo ? 'Activo' : 'Inactivo'}}
+                                    </button>
+                                  </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </md-card-content>
+                    <md-card-actions layout="row" layout-align="end center">
+                      <md-button>Agregar</md-button>
+                    </md-card-actions>
+                </md-card>
+                <md-card class="md-padding">
+                    <md-card-header>
+                      <md-card-header-text>
+                        <md-icon>bookmark</md-icon>
+                        <span class="ui header md-title">Servicios</span>
+                      </md-card-header-text>
+                    </md-card-header>
+                    <md-card-content>
+                      <table class="ui very basic single line stackable table">
+                            <tbody>
+                                <tr ng-repeat="item in servicios">
+                                  <td>{{item.nombre}}</td>
+                                  <td class="right aligned">
+                                    <button 
+                                        class="ui mini button"
+                                        ng-class="{true:'positive', false:''}[item.esActivo]"
+                                        ng-click="vm.changeStatus(item);">
+                                        {{item.esActivo ? 'Activo' : 'Inactivo'}}
+                                    </button>
+                                  </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </md-card-content>
+                    <md-card-actions layout="row" layout-align="end center">
+                      <md-button>Agregar</md-button>
+                    </md-card-actions>
+                </md-card>
+            </div>
+        </div>
+</div>

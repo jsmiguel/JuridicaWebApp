@@ -1,0 +1,32 @@
+{
+  "name": "juridicaWebApp",
+  "authors": [
+    "Jose Miguel Garcia <js.miguel@outlook.com>"
+  ],
+  "description": "Gestion de práctica juridica",
+  "main": "app.js",
+  "moduleType": [
+    "amd"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "angularjs#~1.4.7",
+    "oclazyload": "~1.0.8",
+    "angular-loading-bar": "~0.8.0",
+    "semantic": "semantic-ui#~2.1.6",
+    "angular-material": "0.11.3",
+    "angular-ui-router": "~0.2.15",
+    "material-design-iconfont": "~0.0.2",
+    "angular-resource": "~1.4.8"
+  }
+}

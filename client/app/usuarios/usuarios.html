@@ -1,0 +1,74 @@
+<div class="ui page">
+    <div>
+        <h3 class="ui dividing header">Usuarios</h3>
+        
+        <div class="ui fluid icon input">
+          <input placeholder="Buscar..." type="text" ng-model="txtBuscar"><i class="inverted circular search link icon"></i>
+        </div>
+
+        <table class="ui unstackable striped table">
+            <thead>
+                <tr>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Género</th>
+                    <th>Tipo Documento</th>
+                    <th>Número</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="usuario in usuarios | filter:txtBuscar">
+                    <td>
+                        {{usuario.nombres}}
+                    </td>
+                    <td>
+                        {{usuario.apellidos}}
+                    </td>
+                    <td>
+                        {{usuario.genero}}
+                    </td>
+                    <td>
+                        {{usuario.tipoDocumento.nombre}}
+                    </td>
+                    <td>
+                        {{usuario.numDocumento}}
+                    </td>
+                    <td>                        
+                        <i class="search icon link" ui-sref="detalleUsuario({ id: usuario.id })">
+                            <md-tooltip md-direction="bottom">
+                                Detalle
+                            </md-tooltip>
+                        </i>
+                        <i class="file text icon link" ui-sref="nuevaSolicitud({ id: usuario.id })">
+                            <md-tooltip md-delay="400" md-direction="bottom" md-autohide="true">
+                              Nueva Solicitud
+                            </md-tooltip>
+                        </i>
+                        <!-- <i class="write icon link">
+                            <md-tooltip md-direction="bottom">
+                                Editar
+                            </md-tooltip>
+                        </i> -->
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot class="full-width">
+                <tr>
+                  <th>
+                     <div class="ui">
+                      Total de registros: {{usuarios.length}}
+                    </div> 
+                  </th>
+                  <th colspan="5">
+                    <a ui-sref="nuevoUsuario">
+                        <div class="ui right floated small primary labeled icon button">
+                          <i class="user icon"></i> Agregar usuario
+                        </div>
+                    </a>                  
+                  </th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

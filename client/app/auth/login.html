@@ -1,0 +1,35 @@
+<div class="ui page">
+	<div class="ui middle aligned center aligned grid">
+	  <div class="login">	  	
+	    <form class="ui large form" ng-submit="logIn($event)">
+		    <div class="ui stacked segment">
+		      <div>
+			  	<img src="assets/images/ufg1.png" class="logo-login">
+			  </div>
+			  <h2 class="ui blue header">
+			    <div class="content">
+			      Centro de Prácticas Jurídicas
+			    </div>
+			  </h2>
+			  <div class="ui section divider"></div>
+		        <div class="field">
+		          <div class="ui left icon input">
+		            <i class="user icon"></i>
+		            <input type="text" name="username" autocomplete="off" ng-model="credentials.username" placeholder="Carnet">
+		          </div>
+		        </div>
+		        <div class="field">
+		          <div class="ui left icon input">
+		            <i class="lock icon"></i>
+		            <input type="password" name="password" autocomplete="off" ng-model="credentials.password" placeholder="Contraseña">
+		          </div>
+		        </div>
+		        <button type="submit" value="Ingresar" class="ui fluid large primary button">Ingresar</button>
+	      </div>
+
+	      <div class="ui error message"></div>
+
+	    </form>
+	  </div>
+	</div>
+</div>

@@ -1,0 +1,166 @@
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url("../../libs/material-design-iconfont/iconfont/MaterialIcons-Regular.eot"); /* For IE6-8 */
+  src: local('Material Icons'), local('MaterialIcons-Regular'), url("../../libs/material-design-iconfont/iconfont/MaterialIcons-Regular.woff2") format('woff2'), url("../../libs/material-design-iconfont/iconfont/MaterialIcons-Regular.woff") format('woff'), url("../../libs/material-design-iconfont/iconfont/MaterialIcons-Regular.ttf") format('truetype');
+}
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px; /* Preferred icon size */
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+/* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+/* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+/* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+/* Support for IE. */
+  -webkit-font-feature-settings: 'liga';
+          font-feature-settings: 'liga';
+}
+
+body {
+  background-color: #ececec;
+}
+body {
+  font: 14px 'Lato', 'Helvetica', sans-serif;
+}
+a {
+  color: #00b7ff;
+}
+.jm-card {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    font-size: 16px;
+    font-weight: 400;
+    min-height: 200px;
+    overflow: hidden;
+    min-width: 330px;
+    z-index: 1;
+    position: relative;
+    background: #fff;
+    border-radius: 2px;
+    box-sizing: border-box;
+}
+.container {
+  min-width: 750px;
+}
+.contenido {
+  margin-left: 100px;
+}
+.login {
+  max-width: 550px;
+  padding-top: 30px;
+}
+.page {
+  margin: 0 auto 0 auto;
+  padding: 20px 30px 10px 30px;
+}
+.fix-overflow {
+  overflow: hidden;
+}
+.logo {
+  display: block;
+  margin: 0 auto 0 auto;
+  height: 64px;
+  padding-top: 5px;
+}
+.logo-login {
+  display: block;
+  margin: 0 auto 0 auto;
+  max-width: 185px;
+  padding-top: 5px;
+}
+.mdl-layout__header-row label {
+  font-weight: 500;
+  font-size: 18px;
+  color: rgba(255,255,255,0.56);
+}
+.mdl-layout__header-row {
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+}
+.mdl-layout .demo-navigation .mdl-navigation__link:hover {
+  background-color: #455a64;
+}
+.mdl-layout .demo-navigation .mdl-navigation__link label {
+  cursor: pointer;
+  font-size: 16px;
+  padding-left: 15px;
+}
+.mdl-layout__header-row .material-icons {
+  padding-right: 5px;
+}
+.mdl-navigation {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+.mdl-layout__drawer {
+  border-right: none;
+}
+.titulo {
+  padding-left: 30px;
+}
+h2.ui.header {
+  display: block;
+  margin: 0 auto 0 auto;
+  padding-left: 20px;
+}
+h2.ui.header div.sub.header {
+  color: #e0e0e0;
+}
+.mdl-layout__header-row label {
+  color: #f5f5f5;
+}
+.mdl-layout__drawer {
+  border-right: none;
+}
+.mdl-layout__drawer .mdl-navigation .mdl-navigation__link .material-icons {
+  color: #c0c0c0;
+}
+.active-nav{
+  background-color: #34495E;
+}
+.mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
+  display: -webkit-box !important;
+  display: -webkit-flex !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-box-align: center;
+  color: #c0c0c0;
+  font-weight: 500;
+}
+.mdl-layout__drawer .mdl-navigation .mdl-navigation__link -webkit-flex-direction: row -ms-flex-direction: row {
+  flex-direction: row;
+}
+.mdl-layout__drawer .mdl-navigation .mdl-navigation__link -webkit-align-items: center -ms-flex-align: center {
+  align-items: center;
+}
+h2.ui.header {
+  color: #f5f5f5;
+}
+.brand {
+  background-color: #f44336;
+}
+.min-height {
+  min-height: 420px;
+}

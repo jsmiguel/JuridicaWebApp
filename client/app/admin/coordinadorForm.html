@@ -1,0 +1,105 @@
+<md-dialog aria-label="Agregar Coordinador">
+    <md-toolbar>
+      <div class="md-toolbar-tools white-text">
+        <h2>Agregar Coordinador</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="formCtrl.cerrar()">
+          <md-icon style="color: white" aria-label="Cerrar diálogo">close</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <form id="form-coordinador" class="ui form" ng-submit="formCtrl.procesar($event)">
+      <md-dialog-content style="width:450px;" flex layout-padding>
+        <div>            
+            <div class="field">
+                <input name="nombres" autocomplete="off" ng-model="formCtrl.formData.coordinador.nombres" placeholder="Nombres" type="text">
+            </div>
+            <div class="field">
+                <input name="apellidos" autocomplete="off" ng-model="formCtrl.formData.coordinador.apellidos" placeholder="Apellidos" type="text">
+            </div>
+            <div class="field">
+                <input name="email" type="text" autocomplete="off" ng-model="formCtrl.formData.cuenta.email" placeholder="Email" type="text">
+            </div>
+            <div class="two fields">
+              <div class="field">
+                  <input name="carnet" type="text" maxlength="8" autocomplete="off" ng-model="formCtrl.formData.cuenta.username" placeholder="Carnet UFG" type="text">
+              </div>
+              <div class="field">
+                  <input name="password" type="password" autocomplete="off" ng-model="formCtrl.formData.cuenta.password" placeholder="Contraseña" type="text">
+              </div>
+            </div>
+        </div>
+      </md-dialog-content>
+      <div class="md-actions" layout="row">
+        <md-button ng-click="formCtrl.cancelar()">
+          Cancelar
+        </md-button>
+        <md-button type="submit" style="margin-right:20px;">
+          Guardar
+        </md-button>
+      </div>
+    </form>
+</md-dialog>
+
+<script>
+    //validaciones del formulario     
+  $('#form-coordinador')
+    .form({
+      fields: {
+          carnet: {
+              identifier : 'carnet',
+              rules: [
+              {
+                  type   : 'empty',
+                  prompt : 'Por favor introduzca el carnet de identificación'
+              },
+              {
+                type:'regExp[/^([A-Za-z]{2})([0-9]{6})$/]',
+                prompt : 'Introduzca el formato correcto'
+              }
+              ]
+          },
+          nombres: {
+              identifier : 'nombres',
+              rules: [
+              {
+                  type   : 'empty',
+                  prompt : 'Por favor introduzca los nombres'
+              }]
+          },
+          apellidos: {
+              identifier : 'apellidos',
+              rules: [
+              {
+                  type   : 'empty',
+                  prompt : 'Por favor introduzca los apellidos'
+              }]
+          },
+          password: {
+              identifier : 'password',
+              rules: [
+              {
+                  type   : 'empty',
+                  prompt : 'Por favor introduzca la contraseña'
+              },
+              {
+                  type   : 'minLength[4]',
+                  prompt : 'Introduzca al menos 4 caracteres'
+              }]
+          },
+          email: {
+              identifier : 'email',
+              rules: [
+              {
+                  type   : 'email',
+                  prompt : 'Por favor introduzca el email'
+              }]
+          }
+      },
+      inline : true,
+      on     : 'blur'
+    })
+  ;
+</script>
+
+

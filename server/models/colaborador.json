@@ -1,0 +1,32 @@
+{
+  "name": "Colaborador",
+  "description": "Colaborador (Asesor o Coordinador)",
+  "plural": "Colaboradores",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "nombres": {
+      "type": "string",
+      "required": true
+    },
+    "apellidos": {
+      "type": "string",
+      "required": true
+    },
+    "telefono": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "cuenta": {
+      "type": "belongsTo",
+      "model": "Cuenta"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

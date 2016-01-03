@@ -1,0 +1,18 @@
+[  
+   {  
+      "nombre":"admin",      
+      "esActivo":true
+   },
+   {  
+      "nombre":"coordinador",
+      "esActivo":true
+   },
+   {  
+      "nombre":"asesor",
+      "esActivo":true
+   },
+   {  
+      "nombre":"practicante",
+      "esActivo":true
+   }
+]

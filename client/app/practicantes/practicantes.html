@@ -1,0 +1,56 @@
+<div class="ui page">
+    <div>
+        <h3 class="ui dividing header">Practicantes</h3>
+
+        <div class="ui fluid icon input">
+          <input placeholder="Buscar..." type="text" ng-model="txtBuscar"><i class="inverted circular search link icon"></i>
+        </div>
+
+        <table class="ui unstackable striped table">
+            <thead>
+                <tr>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Género</th>
+                    <th>Estado Civil</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="practicante in practicantes | filter:txtBuscar">
+                    <td>
+                        {{practicante.nombres}}
+                    </td>
+                    <td>
+                        {{practicante.apellidos}}
+                    </td>
+                    <td>
+                        {{practicante.genero}}
+                    </td>
+                    <td>
+                        {{practicante.estadoFamiliar.nombre}}
+                    </td>
+                    <td>
+                        Editar
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot class="full-width">
+                <tr>
+                  <th>
+                     <div class="ui">
+                      Total de registros: {{practicantes.length}}
+                    </div> 
+                  </th>
+                  <th colspan="4">
+                    <a ui-sref="nuevoPracticante">
+                        <div class="ui right floated small primary labeled icon button">
+                          <i class="user icon"></i> Agregar practicante
+                        </div>
+                    </a>                  
+                  </th>
+                </tr>
+            </tfoot>
+        </table>
+    </div> 
+</div>

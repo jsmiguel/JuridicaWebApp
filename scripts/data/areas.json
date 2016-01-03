@@ -1,0 +1,14 @@
+[  
+   {  
+      "nombre":"Penal",      
+      "esActivo":true
+   },
+   {  
+      "nombre":"Civil",
+      "esActivo":true
+   },
+   {  
+      "nombre":"Familia",
+      "esActivo":true
+   }
+]

@@ -1,0 +1,60 @@
+{
+  "name": "Solicitud",
+  "description": "Solicitud de servicio",
+  "plural": "Solicitudes",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "numero": {
+      "type": "string",
+      "required": true,
+      "index": {
+        "unique": true
+      },
+      "mysql": {
+        "columnName": "numero_solicitud",
+        "dataType": "varchar",
+        "dataLength": 15
+      }
+    },
+    "fecha": {
+      "type": "date"
+    },
+    "hechosExpuestos": {
+      "type": "string"
+    },
+    "asesoriaBrindada": {
+      "type": "string"
+    },
+    "descripcionProblema": {
+      "type": "string"
+    },
+    "fechaCierre": {
+      "type": "date"
+    },
+    "observaciones": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "usuario": {
+      "type": "belongsTo",
+      "model": "Usuario"
+    },
+    "servicio": {
+      "type": "belongsTo",
+      "model": "Servicio"
+    },
+    "motivo": {
+      "type": "belongsTo",
+      "model": "Motivo",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

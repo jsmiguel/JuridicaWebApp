@@ -1,0 +1,145 @@
+{
+  "name": "Usuario",
+  "description": "Usuario jurídico",
+  "plural": "Usuarios",
+  "base": "PersistedModel",
+  "strict": true,
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "numDocumento": {
+      "type": "string",
+      "required": true,
+      "index": {
+        "unique": true
+      },
+      "mysql": {
+        "columnName": "num_documento",
+        "dataType": "varchar",
+        "dataLength": 15
+      }
+    },
+    "nombres": {
+      "type": "string",
+      "required": true,
+      "mysql": {
+        "columnName": "nombres",
+        "dataType": "varchar",
+        "dataLength": 25
+      }
+    },
+    "apellidos": {
+      "type": "string",
+      "required": true,
+      "mysql": {
+        "columnName": "apellidos",
+        "dataType": "varchar",
+        "dataLength": 25
+      }
+    },
+    "genero": {
+      "type": "string",
+      "mysql": {
+        "columnName": "genero",
+        "dataType": "varchar",
+        "dataLength": 9
+      }
+    },
+    "fechaNac": {
+      "type": "date",
+      "mysql": {
+        "columnName": "fecha_nac",
+        "dataType": "date"
+      }
+    },
+    "direccion": {
+      "type": "string",
+      "mysql": {
+        "columnName": "direccion",
+        "dataType": "varchar",
+        "dataLength": 250
+      }
+    },
+    "conyuge": {
+      "type": "string",
+      "mysql": {
+        "columnName": "conyuge",
+        "dataType": "varchar",
+        "dataLength": 80
+      }
+    },
+    "telefono": {
+      "type": "string",
+      "mysql": {
+        "columnName": "tel_fijo",
+        "dataType": "varchar",
+        "dataLength": 15
+      }
+    },
+    "movil": {
+      "type": "string",
+      "mysql": {
+        "columnName": "tel_movil",
+        "dataType": "varchar",
+        "dataLength": 15
+      }
+    },
+    "ingresosFamiliares": {
+      "type": "number",
+      "mysql": {
+        "columnName": "ingresos_familiares_mensuales",
+        "dataType": "float",
+        "dataLength": null,
+        "dataPrecision": 2,
+        "dataScale": 0
+      }
+    },
+    "numFamiliares": {
+      "type": "string",
+      "mysql": {
+        "columnName": "num_nucleo_familiar",
+        "dataType": "varchar",
+        "dataLength": 2
+      }
+    },
+    "profesion": {
+      "type": "string",
+      "mysql": {
+        "columnName": "profesion",
+        "dataType": "varchar",
+        "dataLength": 80
+      }
+    },
+    "dirTrabajo": {
+      "type": "string",
+      "mysql": {
+        "columnName": "dir_trabajo",
+        "dataType": "varchar",
+        "dataLength": 250
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "tipoDocumento": {
+      "type": "belongsTo",
+      "model": "TipoDocumento"
+    },
+    "pais": {
+      "type": "belongsTo",
+      "model": "Pais"
+    },
+    "estadoCivil": {
+      "type": "belongsTo",
+      "model": "EstadoCivil"
+    },
+    "solicitudes": {
+      "type": "hasMany",
+      "model": "Solicitud"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

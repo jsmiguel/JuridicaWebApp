@@ -1,0 +1,26 @@
+{
+  "name": "EstadoCivil",
+  "description": "Estado Civil",
+  "plural": "EstadosCiviles",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true,
+    "mysql": {
+      "table": "Catalogo_Estado_Civil"
+    }
+  },
+  "properties": {
+    "nombre": {
+      "type": "string",
+      "required": true
+    },
+    "esActivo": {
+      "type": "boolean"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

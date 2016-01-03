@@ -1,0 +1,56 @@
+{
+  "name": "Expediente",
+  "description": "Expediente del caso",
+  "plural": "Expedientes",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "numero": {
+      "type": "string",
+      "required": true,
+      "index": {
+        "unique": true
+      },
+      "mysql": {
+        "columnName": "numero_expediente",
+        "dataType": "varchar",
+        "dataLength": 10
+      }
+    },
+    "fechaCierre": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "solicitud": {
+      "type": "belongsTo",
+      "model": "Solicitud"
+    },
+    "asesor": {
+      "type": "belongsTo",
+      "model": "Colaborador"
+    },
+    "coordinador": {
+      "type": "belongsTo",
+      "model": "Colaborador"
+    },
+    "practicante": {
+      "type": "belongsTo",
+      "model": "Practicante"
+    },
+    "area": {
+      "type": "belongsTo",
+      "model": "Area"
+    },
+    "eventos": {
+      "type": "hasMany",
+      "model": "Evento"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

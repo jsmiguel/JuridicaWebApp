@@ -1,0 +1,63 @@
+<div class="ui page">
+	<h3 class="ui dividing header">Solicitudes</h3>
+
+    <div class="ui fluid icon input">
+      <input placeholder="Buscar..." type="text" ng-model="txtBuscar"><i class="inverted circular search link icon"></i>
+    </div>
+
+	<table class="ui unstackable striped table">
+        <thead>
+            <tr>
+                <th>Número</th>
+                <th>Nombre</th>
+                <th>Tipo Doc.</th>
+                <th>Num. Doc.</th>
+                <th>Servicio</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="solicitud in solicitudes | filter:txtBuscar">
+                <td>
+                    {{solicitud.numero}}
+                </td>
+                <td>
+                    {{solicitud.usuario.nombres + ' ' + solicitud.usuario.apellidos}}
+                </td>
+                <td>
+                    {{solicitud.usuario.tipoDocumento.nombre}}
+                </td>
+                <td>
+                    {{solicitud.usuario.numDocumento}}
+                </td>
+                <td>
+                    {{solicitud.servicio.nombre}}
+                </td>
+                <td>
+                    {{solicitud.fecha | date : 'dd/MM/yyyy'}}
+                </td>
+                <td>
+                    {{solicitud.estado ? 'Aprobada': 'En Proceso'}}
+                </td>
+                <td>
+                    <i class="search icon link" ui-sref="detalleSolicitud(solicitud.id)">
+                        <md-tooltip md-direction="bottom">
+                            Detalle
+                        </md-tooltip>
+                    </i>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot class="full-width">
+            <tr>
+              <th colspan="8"
+                 <div class="ui">
+                  Total de registros: {{ solicitudes.length }}
+                </div> 
+              </th>
+            </tr>
+        </tfoot>
+    </table>
+</div>

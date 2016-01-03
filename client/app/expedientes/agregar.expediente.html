@@ -1,0 +1,58 @@
+<div class="ui page">  
+  <md-card >
+        <md-toolbar class="md-primary md-hue-2">
+            <div class="md-toolbar-tools">
+                <i class="material-icons">folder_shared</i>
+                <span style="padding-left:10px;">Creación de expediente</span>
+            </div>
+        </md-toolbar>
+        <md-card-content>
+            <md-content layout-padding>                
+              <h3 class="ui dividing header">Solicitud de {{solicitud.servicio.nombre}}</h3>
+              <div layout layout-sm="column">
+                <md-input-container flex>
+                  <label>Nombres</label>
+                  <input ng-model="solicitud.usuario.nombres" readonly>
+                </md-input-container>
+                <md-input-container flex>
+                  <label>Apellidos</label>
+                  <input ng-model="solicitud.usuario.apellidos" readonly>
+                </md-input-container>
+              </div>
+              <md-input-container class="md-block">
+                <label>Descripcion del problema</label>
+                <!-- <textarea type="text" rows="2" readonly="" name="descripcion" ng-model="solicitud.descripcionProblema"></textarea> -->
+                <textarea ng-model="solicitud.descripcionProblema" columns="1" readonly></textarea>
+              </md-input-container>
+              <md-input-container class="md-block">
+                <label>Hechos Expuestos</label>
+                <!-- <textarea type="text" rows="2" readonly="" name="descripcion" ng-model="solicitud.descripcionProblema"></textarea> -->
+                <textarea ng-model="solicitud.hechosExpuestos" columns="1" readonly></textarea>
+              </md-input-container>
+              <h3 class="ui dividing header">Asignación</h3>
+                <md-autocomplete
+                    md-selected-item="ctrl.practicante"
+                    md-search-text="ctrl.searchTextPracticante"
+                    md-items="practicante in practicantes | filter:ctrl.searchTextPracticante",
+                    md-item-text="practicante.nombres + ' ' + practicante.apellidos"
+                    md-min-length="3"
+                    placeholder="Seleccione practicante"
+                    md-floating-label="Practicante">
+                    <md-item-template>
+                      <span md-highlight-text="ctrl.searchTextPracticante" md-highlight-flags="^i">{{practicante.nombres + ' ' + practicante.apellidos}}</span>
+                    </md-item-template>
+                    <md-not-found>
+                      No se encontraron resultados: "{{ctrl.searchTextPracticante}}".
+                    </md-not-found>
+                </md-autocomplete> 
+                <md-button aria-label="submit" md-ripple-size="auto" ng-click="agregarExpediente(solicitud.id)">
+                  <md-icon>done</md-icon>
+                  Crear expediente
+                </md-button>
+            </md-content>
+        </md-card-content>
+        <md-card-footer>
+        Fecha de solicitud: {{solicitud.createdAt | date : 'dd/MM/yyyy'}}
+        </md-card-footer>
+    </md-card>
+</div>

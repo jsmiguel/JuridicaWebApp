@@ -1,0 +1,10 @@
+[  
+   {  
+      "nombre":"DUI",
+      "esActivo":true
+   },
+   {  
+      "nombre":"NIT",
+      "esActivo":true
+   }
+]

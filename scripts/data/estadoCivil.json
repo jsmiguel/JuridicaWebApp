@@ -1,0 +1,14 @@
+[  
+   {  
+      "nombre":"Soltero(a)",
+      "esActivo":true
+   },
+   {  
+      "nombre":"Casado(a)",
+      "esActivo":true
+   },
+   {  
+      "nombre":"Viudo(a)",
+      "esActivo":true
+   }
+]

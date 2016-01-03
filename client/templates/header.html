@@ -1,0 +1,19 @@
+<header class="mdl-layout__header">
+	<div class="mdl-layout__header-row">					
+		<h2 class="ui header"><img src="public/images/Law-64.png" alt="" class="ui image"/>
+			<div class="content">Control de Casos
+				<div class="sub header">Centro de Práctica Jurídica</div>
+			</div>
+		</h2>					
+		<div class="mdl-layout-spacer"></div>
+		<i class="material-icons">account_box</i>
+		<label style="font-weight: bold;"> {{ currentAccount.carnet | uppercase}} </label>
+		<button id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon">
+			<i class="material-icons">expand_more</i>
+		</button>
+		<ul for="demo-menu-lower-right" class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect">
+			<!-- <li class="mdl-menu__item">Ajustes</li> -->
+			<li class="mdl-menu__item" ng-click="logOut()">Cerrar Sesión</li>
+		</ul>
+	</div>
+</header>

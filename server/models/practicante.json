@@ -1,0 +1,56 @@
+{
+  "name": "Practicante",
+  "plural": "Practicantes",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "nombres": {
+      "type": "string",
+      "required": true
+    },
+    "apellidos": {
+      "type": "string",
+      "required": true
+    },
+    "fechaNac": {
+      "type": "date"
+    },
+    "direccion": {
+      "type": "string",
+      "required": true
+    },
+    "genero": {
+      "type": "string",
+      "required": true
+    },
+    "telefono": {
+      "type": "string"
+    },
+    "movil": {
+      "type": "string"
+    },
+    "dirTrabajo": {
+      "type": "string"
+    },
+    "numDocumento": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "cuenta": {
+      "type": "belongsTo",
+      "model": "Cuenta"
+    },
+    "tipoDocumento": {
+      "type": "belongsTo",
+      "model": "TipoDocumento"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

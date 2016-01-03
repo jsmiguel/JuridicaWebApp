@@ -1,0 +1,39 @@
+{
+  "name": "Evento",
+  "description": "Evento programado",
+  "plural": "Eventos",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "nombre": {
+      "type": "string",
+      "required": true
+    },
+    "descripcion": {
+      "type": "string"
+    },
+    "fecha": {
+      "type": "date",
+      "required": true
+    },
+    "comentario": {
+      "type": "string"
+    },
+    "realizado": {
+      "type": "boolean"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "expediente": {
+      "type": "belongsTo",
+      "model": "Expediente",
+      "foreignKey": "expedienteId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

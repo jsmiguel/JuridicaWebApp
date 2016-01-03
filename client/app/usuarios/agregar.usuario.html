@@ -1,0 +1,128 @@
+<div class="ui page">
+  <div class="ui segment">
+    <form id="form-usuarios" ng-submit="agregarUsuario()" class="ui form">
+      <h3 class="ui dividing header">Agregar Usuario</h3>
+      <div class="four fields">
+        <div class="required field">
+          <label>Nombres</label>
+          <input placeholder="Nombres" type="text" autocomplete="off" name="nombres" ng-model="formData.nombres"/>
+        </div>
+        <div class="required field">
+          <label>Apellidos</label>
+          <input placeholder="Apellidos" type="text" autocomplete="off" name="apellidos" ng-model="formData.apellidos"/>
+        </div>
+        <div class="required field">
+          <label>Género</label>
+          <select name="genero" ng-model="formData.genero" class="ui dropdown">
+            <option value="">Seleccione</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Femenino">Femenino</option>
+          </select>
+        </div>
+        <div class="required six wide field">
+          <label> Fecha de Nacimiento</label>
+          <jm-date name="birthdate" ng-model="formData.fechaNac" min-years-old="18" max-years-old="80" year-order="desc"></jm-date>
+        </div>
+        <!-- <div class="required six wide field">
+          <label> Fecha de Nacimiento</label>
+          <div class="three fields">
+            <div class="field">
+              <input type="text" name="anio" ng-model="fechaNac[anio]" placeholder="Año">
+            </div>
+            <div class="six wide field">
+              <select name="mes" ng-model="formData.fechaNac[mes]" class="ui fluid search dropdown">
+                <option value="">Mes</option>
+                <option value="01">Enero</option>
+                <option value="02">Febrero</option>
+                <option value="03">Marzo</option>
+                <option value="04">Abril</option>
+                <option value="05">Mayo</option>
+                <option value="06">Junio</option>
+                <option value="07">Julio</option>
+                <option value="08">Agosto</option>
+                <option value="09">Septiembre</option>
+                <option value="10">Octubre</option>
+                <option value="11">Noviembre</option>
+                <option value="12">Diciembre</option>
+              </select>
+            </div>
+            <div class="three wide field">
+              <input type="text" name="dia" ng-model="fechaNac[dia]" placeholder="Dia">
+            </div>
+          </div>
+        </div> -->
+      </div>
+      <div class="three fields">
+        <div class="required field">
+          <label>Estado Civil</label>
+          <select name="estadoCivil" ng-model="formData.estadoCivilId" autocomplete="off" class="ui dropdown">
+            <option value="">Seleccione</option>
+            <option ng-repeat="estado in estadoCivil" value="{{estado.id}}">{{estado.nombre}}</option>
+          </select>
+        </div>
+        <div class="required field">
+          <label>Tipo Documento</label>
+          <select name="tipoDocumento" ng-model="formData.tipoDocumentoId" autocomplete="off" class="ui dropdown">
+            <option value="">Seleccione</option>
+            <option ng-repeat="tipo in tiposDocumento" value="{{tipo.id}}">{{tipo.nombre}}</option>
+          </select>
+        </div>
+        <div class="required field">
+          <label>Num. Documento</label>
+          <input placeholder="Num. Documento" type="text" autocomplete="off" name="numDocumento" ng-model="formData.numDocumento"/>
+        </div>
+      </div>
+      <div class="required field">
+        <label>Direccion</label>
+        <textarea type="text" autocomplete="off" rows="2" name="direccion" ng-model="formData.direccion"></textarea>
+      </div>
+      <div class="two fields">
+        <div class="required field">
+          <label>País</label>
+          <select name="pais" ng-model="formData.paisId" autocomplete="off" class="ui search dropdown">
+            <option value="">Seleccione</option>
+            <option ng-repeat="pais in paises" value="{{pais.id}}">{{pais.nombre}}</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Telefono (Casa)</label>
+          <input type="text" autocomplete="off" name="telefono" ng-model="formData.telefono"/>
+        </div>
+        <div class="field">
+          <label>Telefono (Movil)</label>
+          <input type="text" autocomplete="off" name="movil" ng-model="formData.movil"/>
+        </div>
+      </div>
+      <div class="field">
+        <label>Nombre del cónyuge o persona con quien convive</label>
+        <input type="text" autocomplete="off" name="conyuge" ng-model="formData.conyuge"/>
+      </div>
+      <div class="three fields">
+        <div class="required field">
+          <label>Numero de personas en núcleo familiar</label>
+          <input type="text" autocomplete="off" name="nucleoFamiliar" ng-model="formData.numFamiliares"/>
+        </div>
+        <div class="required field">
+          <label>Ingreso mensual del núcleo familiar</label>
+          <input type="text" autocomplete="off" name="ingresoFamiliar" ng-model="formData.ingresosFamiliares"/>
+        </div>
+        <div class="required field"> 
+          <label>Profesión u oficio</label>
+          <input type="text" autocomplete="off" name="profesion" ng-model="formData.profesion"/>
+        </div>
+      </div>
+      <div class="required field">
+        <label>Direccion de trabajo</label>
+        <textarea type="text" autocomplete="off" rows="2" name="dirTrabajo" ng-model="formData.dirTrabajo"></textarea>
+      </div>
+      <div class="ui fitted divider"></div>
+      <div class="field">
+        <div class="field">  
+          <button type="submit" value="Crear" class="ui primary button">Crear</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="app/usuarios/agregar.usuario.js"></script>

@@ -1,0 +1,26 @@
+{
+  "name": "Motivo",
+  "description": "Motivos de rechazo",
+  "plural": "Motivos",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true,
+    "mysql": {
+      "table": "Catalogo_Motivo"
+    }
+  },
+  "properties": {
+    "nombre": {
+      "type": "string",
+      "required": true
+    },
+    "esActivo": {
+      "type": "boolean"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

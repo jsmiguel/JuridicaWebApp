@@ -1,0 +1,26 @@
+{
+  "name": "TipoDocumento",
+  "description": "Tipos de documento de identidad",
+  "plural": "TiposDocumento",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true,
+    "mysql": {
+      "table": "Catalogo_Tipo_Documento"
+    }
+  },
+  "properties": {
+    "nombre": {
+      "type": "string",
+      "required": true
+    },
+    "esActivo": {
+      "type": "boolean"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
