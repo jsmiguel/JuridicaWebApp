@@ -1,11 +1,17 @@
 <div class="ui page">
 	<h3 class="ui dividing header">Expedientes</h3>
-	<table class="ui unstackable striped table">
+
+    <div class="ui fluid icon input">
+      <input placeholder="Buscar..." type="text" ng-model="txtBuscar"><i class="inverted circular search link icon"></i>
+    </div>
+
+	<table class="ui stackable striped table">
         <thead>
         	<tr>
-        		<th># Expediente</th>
-        		<th>Nombres (Practicante)</th>
-                <th>Apellidos (Practicante)</th> 
+        		<th>Expediente N°</th>
+                <th>Solicitud N°</th>
+        		<th>Practicante</th>
+                <th>Asesor</th> 
         		<th>Descripción</th>
                 <th>Fecha</th>
                 <th>Estado</th>
@@ -13,27 +19,31 @@
         	</tr>
         </thead>
         <tbody>
-            <tr ng-repeat="expediente in expedientes">
+            <tr ng-repeat="expediente in vm.expedientes | filter:txtBuscar">
             	<td>
-                    {{expediente.id}}
+                    {{expediente.numero}}
                 </td>
                 <td>
-                    {{expediente.practicante.nombres}}
+                    {{expediente.solicitud.numero}}
                 </td>
                 <td>
-                    {{expediente.practicante.apellidos}}
+                    {{expediente.practicante.nombres +' '+ expediente.practicante.apellidos}}
                 </td>
                 <td>
-                    {{expediente.solicitud.descripcionProblema}}
+                    {{expediente.asesor.colaborador.nombres+' '+expediente.asesor.colaborador.apellidos}}
                 </td>
                 <td>
-                    {{expediente.createdAt | date : 'dd/MM/yyyy'}}
+                    {{expediente.solicitud.servicio.nombre}}
                 </td>
                 <td>
-                    {{expediente.estado.nombre}}
+                    {{expediente.creado | date : 'dd/MM/yyyy'}}
                 </td>
                 <td>
-                    <i class="search icon link" ng-click="detalleExpediente(expediente.id)">
+                    <div ng-if="expediente.esActivo" class="ui blue horizontal label">Activo</div>
+                    <div ng-if="expediente.esActivo == false" class="ui horizontal label">Cerrado</div>
+                </td>
+                <td>
+                    <i class="search icon link" ui-sref="detalleExpediente({ id: expediente.id })">
                         <md-tooltip md-direction="bottom">
                             Detalle
                         </md-tooltip>
@@ -43,9 +53,9 @@
         </tbody>
         <tfoot class="full-width">
             <tr>
-              <th colspan="7"
+              <th colspan="8"
                  <div class="ui">
-                  Total de registros: {{ expedientes.length }}
+                  Total de registros: {{ vm.expedientes.length }}
                 </div> 
               </th>
             </tr>

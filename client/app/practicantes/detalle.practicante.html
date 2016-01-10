@@ -1,0 +1,77 @@
+<div class="ui page">
+    <md-card >
+        <md-toolbar class="md-primary md-hue-2">
+            <div class="md-toolbar-tools">
+                <md-button ui-sref="{{previusState}}" class="md-icon-button" aria-label="Anterior">
+                  <md-icon>navigate_before</md-icon>
+                  <md-tooltip md-delay="400" md-direction="bottom" md-autohide="true">
+                    Ir atrás
+                  </md-tooltip>
+                </md-button>
+                <i class="material-icons">account_box</i>
+                <span style="padding-left:10px;">Practicante #{{vm.practicante.id}}</span>
+                <div class="mdl-layout-spacer"></div>
+                <md-button ng-click="vm.editable = true;" class="md-fab md-mini">
+                  <md-tooltip md-direction="down">Editar</md-tooltip>
+                  <md-icon>create</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-card-content>
+            <md-content layout-padding>
+                <form name="practicanteForm">
+                    <!-- <md-subheader>Información personal</md-subheader> -->
+                    <h3 class="ui dividing header">Información personal</h3>
+                    <div layout layout-sm="column">
+                        <md-input-container flex>
+                          <label>Nombres</label>
+                          <input ng-model="vm.practicante.nombres" type="text" ng-readonly="!vm.editable">
+                        </md-input-container>
+                        <md-input-container flex>
+                          <label>Apellidos</label>
+                          <input ng-model="vm.practicante.apellidos" type="text" ng-readonly="!vm.editable">
+                        </md-input-container>
+                        <md-input-container>
+                          <label>Género</label>
+                          <input ng-model="vm.practicante.genero" readonly>
+                        </md-input-container>
+                    </div>
+                    <div layout layout-sm="column">
+                        <md-input-container flex>
+                          <label>DUI</label>
+                          <input ng-model="vm.practicante.numDocumento" type="text" readonly>
+                        </md-input-container>
+                        <md-input-container>
+                          <label>Edad</label>
+                          <input ng-model="vm.edad" readonly>
+                        </md-input-container>
+                    </div> 
+                    <h3 class="ui dividing header">Información de contacto</h3>
+                    <div layout layout-sm="column">
+                        <md-input-container flex>
+                          <label>Dirección</label>
+                          <input ng-model="vm.practicante.direccion" type="text" ng-readonly="!vm.editable">
+                        </md-input-container>
+                        <md-input-container>
+                          <label>Teléfono fijo</label>
+                          <input ng-model="vm.practicante.telefono" ng-readonly="!vm.editable">
+                        </md-input-container>
+                        <md-input-container>
+                          <label>Teléfono móvil</label>
+                          <input ng-model="vm.practicante.movil" ng-readonly="!vm.editable">
+                        </md-input-container>
+                    </div> 
+                </form>  
+            </md-content>
+            Última actualización: {{vm.practicante.actualizado ? vm.practicante.actualizado : vm.practicante.creado | date : 'dd/MM/yyyy'}}
+        </md-card-content>
+         <md-card-footer ng-if="vm.editable" layout="row" layout-align="end center">
+          <md-button ng-click="vm.editable = false;">
+            Cancelar
+          </md-button>
+          <md-button ng-click="vm.updatePracticante()" style="margin-right:20px;">
+            Guardar
+          </md-button>
+        </md-card-footer>
+    </md-card>
+</div>

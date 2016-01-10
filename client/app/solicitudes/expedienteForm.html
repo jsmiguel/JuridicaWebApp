@@ -1,0 +1,67 @@
+<md-dialog aria-label="dialog-colaborador">
+    <md-toolbar class="md-primary md-hue-2">
+      <div class="md-toolbar-tools white-text">
+        <h2>Asignación</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="formCtrl.cerrar()">
+          <md-icon style="color: white" aria-label="Cerrar diálogo">close</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+      <md-dialog-content style="min-width:450px;" flex layout-padding>     
+          <div>
+            <form name="expediente-form" ng-submit="$event.preventDefault()">
+                <md-subheader>Expediente No: {{formCtrl.number}}</md-subheader>
+                <md-autocomplete
+                    md-selected-item="formCtrl.formData.practicante"
+                    md-search-text="formCtrl.searchTextPracticante"
+                    md-items="practicante in formCtrl.practicantes | filter:formCtrl.searchTextPracticante",
+                    md-item-text="practicante.carnet + ' - ' + practicante.nombres + ' ' + practicante.apellidos"
+                    md-min-length="3"
+                    placeholder="Seleccione practicante"
+                    md-floating-label="Practicante">
+                    <md-item-template>
+                      <md-icon>face</md-icon>
+                      <span md-highlight-text="formCtrl.searchTextPracticante" md-highlight-flags="^i">{{practicante.carnet +' - '+practicante.nombres + ' ' + practicante.apellidos}}</span>
+                    </md-item-template>
+                    <md-not-found>
+                      No se encontraron resultados: "{{formCtrl.searchTextPracticante}}".
+                    </md-not-found>
+                </md-autocomplete> 
+                <md-autocomplete
+                    md-selected-item="formCtrl.formData.asesor"
+                    md-search-text="formCtrl.searchTextAsesor"
+                    md-items="asesor in formCtrl.asesores | filter:formCtrl.searchTextAsesor",
+                    md-item-text="asesor.username + ' - ' +asesor.colaborador.nombres + ' ' + asesor.colaborador.apellidos"
+                    md-min-length="3"
+                    placeholder="Seleccione asesor"
+                    md-floating-label="Asesor">
+                    <md-item-template>
+                      <md-icon>face</md-icon>
+                      <span md-highlight-text="formCtrl.searchTextAsesor" md-highlight-flags="^i">{{asesor.username + ' - ' + asesor.colaborador.nombres + ' ' + asesor.colaborador.apellidos}}</span>
+                    </md-item-template>
+                    <md-not-found>
+                      No se encontraron resultados: "{{formCtrl.searchTextAsesor}}".
+                    </md-not-found>
+                </md-autocomplete>
+                <md-input-container class="md-block">
+                  <label>Área</label>
+                  <md-select name="area" ng-model="formCtrl.formData.area" required>
+                    <md-option ng-repeat="area in formCtrl.areas" value="{{ area.id }}">{{area.nombre}}</md-option>
+                  </md-select>
+                  <div class="errors" ng-messages="expediente-form.area.$error" ng-if="area.$dirty">
+                    <div ng-message="required">Requerido</div>
+                  </div>
+                </md-input-container>
+            </form>
+            <div class="md-actions" layout="row">
+              <md-button ng-click="formCtrl.cancelar()">
+                Cancelar
+              </md-button>
+              <md-button ng-click="formCtrl.procesar($event)" style="margin-right:20px;">
+                Guardar
+              </md-button>
+            </div>
+         </div>
+      </md-dialog-content>
+</md-dialog>

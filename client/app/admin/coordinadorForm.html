@@ -1,5 +1,5 @@
 <md-dialog aria-label="Agregar Coordinador">
-    <md-toolbar>
+    <md-toolbar class="md-primary md-hue-2">
       <div class="md-toolbar-tools white-text">
         <h2>Agregar Coordinador</h2>
         <span flex></span>
@@ -8,7 +8,7 @@
         </md-button>
       </div>
     </md-toolbar>
-    <form id="form-coordinador" class="ui form" ng-submit="formCtrl.procesar($event)">
+    <form id="form-coordinador" class="ui form" ng-submit="$event.preventDefault()">
       <md-dialog-content style="width:450px;" flex layout-padding>
         <div>            
             <div class="field">
@@ -34,7 +34,7 @@
         <md-button ng-click="formCtrl.cancelar()">
           Cancelar
         </md-button>
-        <md-button type="submit" style="margin-right:20px;">
+        <md-button ng-click="formCtrl.procesar()" style="margin-right:20px;">
           Guardar
         </md-button>
       </div>

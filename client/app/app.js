@@ -5,9 +5,12 @@
   angular.module('juridicaWebApp', ['ngMaterial','ui.router','juridicaServices','oc.lazyLoad'])
 
   //.constant('API_URL', 'http://api.jsmiguel.com')
-  //.constant('API_URL', 'http://localhost:1337')
+  .constant('API_URL', 'http://localhost/api:3000')
 
-  .config(function ($urlRouterProvider, $locationProvider, $mdThemingProvider, $logProvider) {
+  .config(function ($urlRouterProvider, $locationProvider, $mdThemingProvider, $logProvider, API_URL) {
+
+      LoopBackResourceProvider.setUrlBase(API_URL);
+
       // Enable log
       $logProvider.debugEnabled(true);
 
@@ -17,17 +20,21 @@
       $locationProvider.html5Mode(true);
 
       $mdThemingProvider.theme('default')
-        .primaryPalette('red')
-        .accentPalette('grey');
+        .primaryPalette('grey')
+        .accentPalette('red');
 
     })
     .run(function ($rootScope, $state, $location, $window, Cuenta) {
 
       function init() {
         
-        $rootScope.authenticated = $window.sessionStorage["authenticated"] || false;
-        $rootScope.token = $window.sessionStorage["token"] || '';
-        $rootScope.account = $window.sessionStorage["account"] || '';
+        $rootScope.authenticated = Cuenta.isAuthenticated();
+        
+        if ($window.sessionStorage["account"]) {
+          $rootScope.account = JSON.parse($window.sessionStorage["account"]);
+        }
+
+        //$rootScope.account = JSON.parse($window.sessionStorage["account"]) || '';
         //$rootScope.authenticated = JSON.parse($window.sessionStorage["authenticated"]) == "true" ? true : false;
         //$rootScope.token = JSON.parse(localStorage.getItem('token') || '[]'); 
         //$rootScope.token = JSON.parse($window.sessionStorage["token"] || '[]'); 

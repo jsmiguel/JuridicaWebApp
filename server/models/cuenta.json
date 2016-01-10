@@ -10,15 +10,17 @@
   "properties": {
     "esActivo": {
       "type": "boolean"
+    },
+    "rolId":{
+      "type": "number",
+      "required": true,
+      "mysql": {
+        "dataType": "integer"
+      }
     }
   },
   "validations": [],
   "relations": {
-    "practicante": {
-      "type": "hasOne",
-      "model": "Practicante",
-      "foreignKey": ""
-    },
     "colaborador": {
       "type": "hasOne",
       "model": "Colaborador",
@@ -27,7 +29,7 @@
     "rol": {
       "type": "belongsTo",
       "model": "Rol",
-      "foreignKey": ""
+      "foreignKey": "rolId"
     }
   },
   "acls": [

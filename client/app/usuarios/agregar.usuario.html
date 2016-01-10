@@ -23,48 +23,20 @@
           <label> Fecha de Nacimiento</label>
           <jm-date name="birthdate" ng-model="formData.fechaNac" min-years-old="18" max-years-old="80" year-order="desc"></jm-date>
         </div>
-        <!-- <div class="required six wide field">
-          <label> Fecha de Nacimiento</label>
-          <div class="three fields">
-            <div class="field">
-              <input type="text" name="anio" ng-model="fechaNac[anio]" placeholder="Año">
-            </div>
-            <div class="six wide field">
-              <select name="mes" ng-model="formData.fechaNac[mes]" class="ui fluid search dropdown">
-                <option value="">Mes</option>
-                <option value="01">Enero</option>
-                <option value="02">Febrero</option>
-                <option value="03">Marzo</option>
-                <option value="04">Abril</option>
-                <option value="05">Mayo</option>
-                <option value="06">Junio</option>
-                <option value="07">Julio</option>
-                <option value="08">Agosto</option>
-                <option value="09">Septiembre</option>
-                <option value="10">Octubre</option>
-                <option value="11">Noviembre</option>
-                <option value="12">Diciembre</option>
-              </select>
-            </div>
-            <div class="three wide field">
-              <input type="text" name="dia" ng-model="fechaNac[dia]" placeholder="Dia">
-            </div>
-          </div>
-        </div> -->
       </div>
       <div class="three fields">
         <div class="required field">
           <label>Estado Civil</label>
           <select name="estadoCivil" ng-model="formData.estadoCivilId" autocomplete="off" class="ui dropdown">
             <option value="">Seleccione</option>
-            <option ng-repeat="estado in estadoCivil" value="{{estado.id}}">{{estado.nombre}}</option>
+            <option ng-repeat="estado in estadoCivil | orderBy: 'nombre'" value="{{estado.id}}">{{estado.nombre}}</option>
           </select>
         </div>
         <div class="required field">
           <label>Tipo Documento</label>
           <select name="tipoDocumento" ng-model="formData.tipoDocumentoId" autocomplete="off" class="ui dropdown">
             <option value="">Seleccione</option>
-            <option ng-repeat="tipo in tiposDocumento" value="{{tipo.id}}">{{tipo.nombre}}</option>
+            <option ng-repeat="tipo in tiposDocumento | orderBy: 'nombre'" value="{{tipo.id}}">{{tipo.nombre}}</option>
           </select>
         </div>
         <div class="required field">
@@ -81,7 +53,7 @@
           <label>País</label>
           <select name="pais" ng-model="formData.paisId" autocomplete="off" class="ui search dropdown">
             <option value="">Seleccione</option>
-            <option ng-repeat="pais in paises" value="{{pais.id}}">{{pais.nombre}}</option>
+            <option ng-repeat="pais in paises | orderBy: 'nombre'" value="{{pais.id}}">{{pais.nombre}}</option>
           </select>
         </div>
         <div class="field">

@@ -48,6 +48,9 @@
 
     $scope.agregarUsuario = function () {
       if (!$.isEmptyObject($scope.formData)) {
+        
+        $scope.formData.creado = new Date();
+
         Usuario
           .create($scope.formData,
             function(response) {
@@ -73,8 +76,11 @@
       }
     }
   })
-  .controller('DetalleUsuarioCtrl', function ($scope, $location, $stateParams, $mdToast, Usuario, Print) {
-    $scope.usuario = [];
+  .controller('DetalleUsuarioCtrl', function ($scope, $log, $location, $stateParams, $mdToast, Usuario, Print) {
+    var vm = this;
+    vm.usuario = [];
+    vm.editable = false;
+    vm.tipoDocumento = '';
 
     Usuario
       .findById({ 
@@ -84,9 +90,22 @@
           }
       })
       .$promise
-      .then(function(response) {
-        $scope.usuario = response;
+      .then(function(usuario) {
+        vm.usuario = usuario;
+        vm.tipoDocumento = usuario.tipoDocumento.nombre;
       });
+
+    vm.updateUsuario = function () {
+      vm.usuario.actualizado = new Date();
+      vm.usuario.$save();
+      vm.editable = false;
+      $mdToast.show(
+        $mdToast.simple()
+          .content('Datos actualizados')
+          .position('right')
+          .hideDelay(3000)
+      );
+    }
 
     $scope.print = function (controller,usuarioID) {
       Print(controller,usuarioID)

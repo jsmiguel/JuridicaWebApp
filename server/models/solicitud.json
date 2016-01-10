@@ -20,9 +20,6 @@
         "dataLength": 15
       }
     },
-    "fecha": {
-      "type": "date"
-    },
     "hechosExpuestos": {
       "type": "string"
     },
@@ -32,27 +29,61 @@
     "descripcionProblema": {
       "type": "string"
     },
+    "docSolicitados": {
+      "type": "string"
+    },
+    "esAprobado": {
+      "type": "boolean"
+    },
+    "actualizado": {
+      "type": "date"
+    },
+    "creado": {
+      "type": "date"
+    },
+    "actualizado": {
+      "type": "date"
+    },
     "fechaCierre": {
       "type": "date"
     },
-    "observaciones": {
-      "type": "string"
+    "usuarioId":{
+      "type": "number",
+      "required": true,
+      "mysql": {
+        "dataType": "integer"
+      }
+    },
+    "servicioId":{
+      "type": "number",
+      "required": true,
+      "mysql": {
+        "dataType": "integer"
+      }
+    },
+    "motivoId":{
+      "type": "number",
+      "mysql": {
+        "dataType": "integer"
+      }
     }
   },
   "validations": [],
   "relations": {
     "usuario": {
       "type": "belongsTo",
-      "model": "Usuario"
+      "model": "Usuario",
+      "foreignKey": "usuarioId"
     },
     "servicio": {
       "type": "belongsTo",
-      "model": "Servicio"
+      "model": "Servicio",
+      "foreignKey": "servicioId"
     },
     "motivo": {
       "type": "belongsTo",
       "model": "Motivo",
-      "foreignKey": ""
+      "foreignKey": "motivoId"
     }
   },
   "acls": [],

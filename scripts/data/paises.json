@@ -11,22 +11,22 @@
    },
    {  
       "nombre":"México",
-      "nacionalidad":"Mexicano",
+      "nacionalidad":"Mexicano(a)",
       "esActivo":true
    },
    {  
       "nombre":"Guatemala",
-      "nacionalidad":"Guatemalteco",
+      "nacionalidad":"Guatemalteco(a)",
       "esActivo":true
    },
    {  
       "nombre":"El Salvador",
-      "nacionalidad":"Salvadoreño",
+      "nacionalidad":"Salvadoreño(a)",
       "esActivo":true
    },
    {  
       "nombre":"Honduras",
-      "nacionalidad":"Hondureño",
+      "nacionalidad":"Hondureño(a)",
       "esActivo":true
    },
    {  
@@ -36,7 +36,7 @@
    },
    {  
       "nombre":"Panamá",
-      "nacionalidad":"Panameño",
+      "nacionalidad":"Panameño(a)",
       "esActivo":true
    },
    {  

@@ -16,6 +16,19 @@ $('.to-tab1').on('click', function () {
 
 var fieldsInfoPersonal =
 {
+    carnet: {
+        identifier : 'carnet',
+        rules: [
+          {
+              type   : 'empty',
+              prompt : 'Por favor introduzca el carnet'
+          },
+          {
+              type   : 'regExp[/^[A-Z]{2}[0-9]{6}$/]',
+              prompt : 'Introduzca el formato correcto. Ej. GP200199'
+          }
+        ]
+    },
     nombres: {
         identifier : 'nombres',
         rules: [
@@ -102,24 +115,24 @@ var fieldsInfoPersonal =
             prompt: 'Por favor introduzca el número de documento'
         },
         {
-            type   : 'regExp[/^[0-9_-]+?$/]',
-            prompt : 'Debe ingresar solo números'
-        },
-        {
             type   : 'minLength[9]',
             prompt : 'Por favor ingrese al menos 9 digitos'
         },
         {
-            type   : 'maxLength[18]',
-            prompt : 'Por favor ingrese menos de 18 digitos'
+            type   : 'maxLength[10]',
+            prompt : 'Excede el máximo de digitos'
+        },
+        {
+            type   : 'regExp[/^[0-9]{8}[-]?[0-9]{1}$/]',
+            prompt : 'Debe ingresar el formato correcto. Ej. 09999999-9'
         }]
     },
-    residencia: {
-        identifier : 'residencia',
+    direccion: {
+        identifier : 'direccion',
         rules: [
         {
             type   : 'empty',
-            prompt : 'Por favor introduzca la residencia'
+            prompt : 'Por favor introduzca la dirección'
         }]
     }
 }

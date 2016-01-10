@@ -104,4 +104,4 @@ seedDB.prototype.beginProcess = function() {
 
 };
 
-seedDB();
+var seed = new seedDB();

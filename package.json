@@ -16,6 +16,7 @@
     "loopback-connector-mysql": "^2.2.0",
     "loopback-datasource-juggler": "^2.39.0",
     "password-generator": "^2.0.2",
+    "pdfkit": "^0.7.2",
     "serve-favicon": "^2.0.1"
   },
   "devDependencies": {

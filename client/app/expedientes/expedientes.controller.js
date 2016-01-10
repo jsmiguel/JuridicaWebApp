@@ -3,99 +3,96 @@
 (function(){
     
   angular.module('juridicaWebApp')
-  .controller('ExpedientesCtrl', function ($scope, $location, Expediente) {
-  	$scope.expedientes = [];
+  .controller('ExpedientesCtrl', function ($location, Expediente) {
+    var vm = this;
+  	vm.expedientes = [];
 
   	Expediente
-        .find()
+        .find({
+          filter: {      
+            include: [{asesor: 'colaborador'}, 'practicante', {solicitud: 'servicio'}]
+          }
+        })
         .$promise
-        .then(function(response) {
-          $scope.expedientes = response;
+        .then(function(expedientes) {
+          vm.expedientes = expedientes;
+        }, function (err) {
+          // body...
         });
-
-    $scope.detalleExpediente = function (expedienteID) {
-      $location.path('/expedientes/detalle/' + expedienteID);
-    }
    
   })
-  .controller('DetalleExpedienteCtrl', function ($scope, $routeParams, $mdToast, Expedientes, Solicitudes, Print, API_URL) {
-  	/*$scope.API_URL = API_URL;
-  	$scope.expediente = [];
+  .controller('DetalleExpedienteCtrl', function ($stateParams, $mdToast, $mdDialog, Expediente) {
+    var vm = this;
+    vm.expediente = {};
 
-  	Expedientedetalle($routeParams.id)
-	  .success(function(expediente {
-	    $scope.expediente= expediente
+    Expediente
+        .findById({ 
+          id: $stateParams.id,
+          filter: {      
+            include: [{asesor: 'colaborador'}, 'practicante','area', {solicitud: ['servicio', 'usuario']}]
+          }
+        })
+        .$promise
+        .then(function(expediente) {
+          vm.expediente = expediente;
+        }, function (err) {
+          // body...
+        });
 
-	    Solicitudes.detalle(expedientesolicitud.id)
-		  .success(function(solicitud) {
-		    $scope.expedientesolicitud = solicitud;
-		  });
+    vm.showForm = function ($event, expedienteId) {
 
-      $scope.print = function (controller,id) {
-      Print(controller,id)
-        .success(function(data) {
-          $mdToast.show(
-              $mdToast.simple()
-                .content('PDF Generado')
+        var parentEl = angular.element(document.body);
+
+        $mdDialog.show({
+          parent: parentEl,
+          targetEvent: $event,
+          templateUrl:'./app/expedientes/closeForm.html',
+          controller: CloseFormController,
+          controllerAs: 'formCtrl',
+          clickOutsideToClose: false
+        });
+        function CloseFormController($location, $mdDialog, $mdToast, $log, $state, $stateParams, Expediente) {
+          var vm = this;
+
+          vm.cerrar = function() {
+            $mdDialog.hide();
+            return false;
+          };
+          vm.cancelar = function() {
+            $mdDialog.cancel();
+            return false;
+          };
+
+          vm.procesar = function ($event) {
+            $event.preventDefault();
+            if (!$.isEmptyObject(vm.formData)) {
+              
+              Expediente.prototype$updateAttributes(
+                { id: expedienteId }, 
+                { 
+                  esActivo: false,
+                  observaciones,
+                  fechaCierre: new Date()
+                });
+
+              $mdToast.show(
+                $mdToast.simple()
+                .content('Expediente cerrado!')
                 .position('right')
-                .hideDelay(3000)
-            );
-          var file = new Blob([data], {type: 'application/pdf'});
-          var fileURL = URL.createObjectURL(file);
-          window.open(fileURL);
-          //window.location = fileURL;
-          
-        });
-      }
+                .hideDelay(3000));
 
-	  });*/
-   
-  })
-  .controller('NuevoExpedientetrl', function ($scope, $routeParams, $mdToast, $location, Solicitudes, Practicantes, Expediente) {
-  	$/*scope.solicitud = [];
-  	$scope.practicantes = [];
-        
-    Practicantes.listar()
-      .success(function(data) {
-        $scope.practicantes = data;
-      });
+              vm.cerrar();
 
-	  Solicitudes.detalle($routeParams.id)
-  	  .success(function(data) {
-  	    $scope.solicitud = data;
-  	  });
+              $state.transitionTo($state.current, $stateParams, {
+                  reload: true,
+                  inherit: false,
+                  notify: true
+              });
+            }
+          }
 
-    $scope.agregarExpediente= function (solicitudID) {
-
-    	$scope.formData = [];
-
-		//f (!$.isEmptyObject($scope.formData)) {
-
-			// call the create function from our service (returns a promise object)
-		      Expediente.crear({ 
-		      		solicitud: solicitudID,
-		      		practicante: $scope.ctrl.practicante.id
-		      	})
-		        .success(function() {
-		          $mdToast.show(
-		            $mdToast.simple()
-		              .content('Creado satisfactoriamente!')
-		              .position('right')
-		              .hideDelay(3000)
-		          );
-		        })
-		        .error(function(error) {
-		          $mdToast.show(
-		            $mdToast.simple()
-		              .content('Error al guardar la solicitud')
-		              .position('right')
-		              .hideDelay(3000)
-		          );
-		        });
-		    
-		    $location.path('/expedientes/');
-	}*/
-    
+        }
+      }  
   });
     
 }());

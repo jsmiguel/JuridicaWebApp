@@ -3,13 +3,6 @@
 var urlBase = "/api";
 var authHeader = 'Authorization';
 
-function getHost(url) {
-  var m = url.match(/^(?:https?:)?\/\/([^\/]+)/);
-  return m ? m[1] : null;
-}
-
-var urlBaseHost = getHost(urlBase) || location.host;
-
 /**
  * @ngdoc overview
  * @name juridicaServices
@@ -31,10 +24,6 @@ var module = angular.module("juridicaServices", ['ngResource']);
  * @description
  *
  * A $resource object for interacting with the `Usuario` model.
- *
- * **Details**
- *
- * Usuario jurídico
  *
  * ## Example
  *
@@ -1113,10 +1102,6 @@ module.factory(
  *
  * A $resource object for interacting with the `Solicitud` model.
  *
- * **Details**
- *
- * Solicitud de servicio
- *
  * ## Example
  *
  * See
@@ -1900,10 +1885,6 @@ module.factory(
  *
  * A $resource object for interacting with the `Cuenta` model.
  *
- * **Details**
- *
- * Cuenta de autentificación
- *
  * ## Example
  *
  * See
@@ -2055,30 +2036,6 @@ module.factory(
         // INTERNAL. Use Cuenta.colaborador.destroy() instead.
         "prototype$__destroy__colaborador": {
           url: urlBase + "/Cuentas/:id/colaborador",
-          method: "DELETE"
-        },
-
-        // INTERNAL. Use Cuenta.practicante() instead.
-        "prototype$__get__practicante": {
-          url: urlBase + "/Cuentas/:id/practicante",
-          method: "GET"
-        },
-
-        // INTERNAL. Use Cuenta.practicante.create() instead.
-        "prototype$__create__practicante": {
-          url: urlBase + "/Cuentas/:id/practicante",
-          method: "POST"
-        },
-
-        // INTERNAL. Use Cuenta.practicante.update() instead.
-        "prototype$__update__practicante": {
-          url: urlBase + "/Cuentas/:id/practicante",
-          method: "PUT"
-        },
-
-        // INTERNAL. Use Cuenta.practicante.destroy() instead.
-        "prototype$__destroy__practicante": {
-          url: urlBase + "/Cuentas/:id/practicante",
           method: "DELETE"
         },
 
@@ -2820,9 +2777,15 @@ module.factory(
           method: "GET"
         },
 
-        // INTERNAL. Use Practicante.cuenta() instead.
-        "::get::Practicante::cuenta": {
-          url: urlBase + "/Practicantes/:id/cuenta",
+        // INTERNAL. Use Expediente.asesor() instead.
+        "::get::Expediente::asesor": {
+          url: urlBase + "/Expedientes/:id/asesor",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Expediente.coordinador() instead.
+        "::get::Expediente::coordinador": {
+          url: urlBase + "/Expedientes/:id/coordinador",
           method: "GET"
         },
 
@@ -3242,201 +3205,6 @@ module.factory(
           var action = TargetResource["::update::Cuenta::colaborador"];
           return action.apply(R, arguments);
         };
-    /**
-     * @ngdoc object
-     * @name juridicaServices.Cuenta.practicante
-     * @header juridicaServices.Cuenta.practicante
-     * @object
-     * @description
-     *
-     * The object `Cuenta.practicante` groups methods
-     * manipulating `Practicante` instances related to `Cuenta`.
-     *
-     * Call {@link juridicaServices.Cuenta#practicante Cuenta.practicante()}
-     * to query all related instances.
-     */
-
-
-        /**
-         * @ngdoc method
-         * @name juridicaServices.Cuenta#practicante
-         * @methodOf juridicaServices.Cuenta
-         *
-         * @description
-         *
-         * Fetches hasOne relation practicante.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `refresh` – `{boolean=}` - 
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Practicante` object.)
-         * </em>
-         */
-        R.practicante = function() {
-          var TargetResource = $injector.get("Practicante");
-          var action = TargetResource["::get::Cuenta::practicante"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name juridicaServices.Cuenta.practicante#create
-         * @methodOf juridicaServices.Cuenta.practicante
-         *
-         * @description
-         *
-         * Creates a new instance in practicante of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Practicante` object.)
-         * </em>
-         */
-        R.practicante.create = function() {
-          var TargetResource = $injector.get("Practicante");
-          var action = TargetResource["::create::Cuenta::practicante"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name juridicaServices.Cuenta.practicante#createMany
-         * @methodOf juridicaServices.Cuenta.practicante
-         *
-         * @description
-         *
-         * Creates a new instance in practicante of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Practicante` object.)
-         * </em>
-         */
-        R.practicante.createMany = function() {
-          var TargetResource = $injector.get("Practicante");
-          var action = TargetResource["::createMany::Cuenta::practicante"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name juridicaServices.Cuenta.practicante#destroy
-         * @methodOf juridicaServices.Cuenta.practicante
-         *
-         * @description
-         *
-         * Deletes practicante of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        R.practicante.destroy = function() {
-          var TargetResource = $injector.get("Practicante");
-          var action = TargetResource["::destroy::Cuenta::practicante"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name juridicaServices.Cuenta.practicante#update
-         * @methodOf juridicaServices.Cuenta.practicante
-         *
-         * @description
-         *
-         * Update practicante of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Practicante` object.)
-         * </em>
-         */
-        R.practicante.update = function() {
-          var TargetResource = $injector.get("Practicante");
-          var action = TargetResource["::update::Cuenta::practicante"];
-          return action.apply(R, arguments);
-        };
 
         /**
          * @ngdoc method
@@ -3486,10 +3254,6 @@ module.factory(
  * @description
  *
  * A $resource object for interacting with the `Colaborador` model.
- *
- * **Details**
- *
- * Colaborador (Asesor o Coordinador)
  *
  * ## Example
  *
@@ -3964,18 +3728,6 @@ module.factory(
           url: urlBase + "/Cuentas/:id/colaborador",
           method: "DELETE"
         },
-
-        // INTERNAL. Use Expediente.asesor() instead.
-        "::get::Expediente::asesor": {
-          url: urlBase + "/Expedientes/:id/asesor",
-          method: "GET"
-        },
-
-        // INTERNAL. Use Expediente.coordinador() instead.
-        "::get::Expediente::coordinador": {
-          url: urlBase + "/Expedientes/:id/coordinador",
-          method: "GET"
-        },
       }
     );
 
@@ -4167,10 +3919,6 @@ module.factory(
  * @description
  *
  * A $resource object for interacting with the `Expediente` model.
- *
- * **Details**
- *
- * Expediente del caso
  *
  * ## Example
  *
@@ -4902,11 +4650,11 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Colaborador` object.)
+         * This usually means the response is a `Cuenta` object.)
          * </em>
          */
         R.asesor = function() {
-          var TargetResource = $injector.get("Colaborador");
+          var TargetResource = $injector.get("Cuenta");
           var action = TargetResource["::get::Expediente::asesor"];
           return action.apply(R, arguments);
         };
@@ -4938,11 +4686,11 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Colaborador` object.)
+         * This usually means the response is a `Cuenta` object.)
          * </em>
          */
         R.coordinador = function() {
-          var TargetResource = $injector.get("Colaborador");
+          var TargetResource = $injector.get("Cuenta");
           var action = TargetResource["::get::Expediente::coordinador"];
           return action.apply(R, arguments);
         };
@@ -5348,15 +5096,15 @@ module.factory(
       { 'id': '@id' },
       {
 
-        // INTERNAL. Use Practicante.cuenta() instead.
-        "prototype$__get__cuenta": {
-          url: urlBase + "/Practicantes/:id/cuenta",
+        // INTERNAL. Use Practicante.estadoCivil() instead.
+        "prototype$__get__estadoCivil": {
+          url: urlBase + "/Practicantes/:id/estadoCivil",
           method: "GET"
         },
 
-        // INTERNAL. Use Practicante.tipoDocumento() instead.
-        "prototype$__get__tipoDocumento": {
-          url: urlBase + "/Practicantes/:id/tipoDocumento",
+        // INTERNAL. Use Practicante.pais() instead.
+        "prototype$__get__pais": {
+          url: urlBase + "/Practicantes/:id/pais",
           method: "GET"
         },
 
@@ -5782,37 +5530,6 @@ module.factory(
           method: "POST"
         },
 
-        // INTERNAL. Use Cuenta.practicante() instead.
-        "::get::Cuenta::practicante": {
-          url: urlBase + "/Cuentas/:id/practicante",
-          method: "GET"
-        },
-
-        // INTERNAL. Use Cuenta.practicante.create() instead.
-        "::create::Cuenta::practicante": {
-          url: urlBase + "/Cuentas/:id/practicante",
-          method: "POST"
-        },
-
-        // INTERNAL. Use Cuenta.practicante.createMany() instead.
-        "::createMany::Cuenta::practicante": {
-          isArray: true,
-          url: urlBase + "/Cuentas/:id/practicante",
-          method: "POST"
-        },
-
-        // INTERNAL. Use Cuenta.practicante.update() instead.
-        "::update::Cuenta::practicante": {
-          url: urlBase + "/Cuentas/:id/practicante",
-          method: "PUT"
-        },
-
-        // INTERNAL. Use Cuenta.practicante.destroy() instead.
-        "::destroy::Cuenta::practicante": {
-          url: urlBase + "/Cuentas/:id/practicante",
-          method: "DELETE"
-        },
-
         // INTERNAL. Use Expediente.practicante() instead.
         "::get::Expediente::practicante": {
           url: urlBase + "/Expedientes/:id/practicante",
@@ -5963,12 +5680,12 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name juridicaServices.Practicante#cuenta
+         * @name juridicaServices.Practicante#estadoCivil
          * @methodOf juridicaServices.Practicante
          *
          * @description
          *
-         * Fetches belongsTo relation cuenta.
+         * Fetches belongsTo relation estadoCivil.
          *
          * @param {Object=} parameters Request parameters.
          *
@@ -5988,23 +5705,23 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Cuenta` object.)
+         * This usually means the response is a `EstadoCivil` object.)
          * </em>
          */
-        R.cuenta = function() {
-          var TargetResource = $injector.get("Cuenta");
-          var action = TargetResource["::get::Practicante::cuenta"];
+        R.estadoCivil = function() {
+          var TargetResource = $injector.get("EstadoCivil");
+          var action = TargetResource["::get::Practicante::estadoCivil"];
           return action.apply(R, arguments);
         };
 
         /**
          * @ngdoc method
-         * @name juridicaServices.Practicante#tipoDocumento
+         * @name juridicaServices.Practicante#pais
          * @methodOf juridicaServices.Practicante
          *
          * @description
          *
-         * Fetches belongsTo relation tipoDocumento.
+         * Fetches belongsTo relation pais.
          *
          * @param {Object=} parameters Request parameters.
          *
@@ -6024,12 +5741,12 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `TipoDocumento` object.)
+         * This usually means the response is a `Pais` object.)
          * </em>
          */
-        R.tipoDocumento = function() {
-          var TargetResource = $injector.get("TipoDocumento");
-          var action = TargetResource["::get::Practicante::tipoDocumento"];
+        R.pais = function() {
+          var TargetResource = $injector.get("Pais");
+          var action = TargetResource["::get::Practicante::pais"];
           return action.apply(R, arguments);
         };
 
@@ -6045,10 +5762,6 @@ module.factory(
  * @description
  *
  * A $resource object for interacting with the `Servicio` model.
- *
- * **Details**
- *
- * Servicios jurídicos
  *
  * ## Example
  *
@@ -6648,10 +6361,6 @@ module.factory(
  *
  * A $resource object for interacting with the `Motivo` model.
  *
- * **Details**
- *
- * Motivos de rechazo
- *
  * ## Example
  *
  * See
@@ -7249,10 +6958,6 @@ module.factory(
  * @description
  *
  * A $resource object for interacting with the `Area` model.
- *
- * **Details**
- *
- * Área jurídica
  *
  * ## Example
  *
@@ -7852,10 +7557,6 @@ module.factory(
  *
  * A $resource object for interacting with the `TipoDocumento` model.
  *
- * **Details**
- *
- * Tipos de documento de identidad
- *
  * ## Example
  *
  * See
@@ -8298,12 +7999,6 @@ module.factory(
           url: urlBase + "/Usuarios/:id/tipoDocumento",
           method: "GET"
         },
-
-        // INTERNAL. Use Practicante.tipoDocumento() instead.
-        "::get::Practicante::tipoDocumento": {
-          url: urlBase + "/Practicantes/:id/tipoDocumento",
-          method: "GET"
-        },
       }
     );
 
@@ -8459,10 +8154,6 @@ module.factory(
  * @description
  *
  * A $resource object for interacting with the `EstadoCivil` model.
- *
- * **Details**
- *
- * Estado Civil
  *
  * ## Example
  *
@@ -8906,6 +8597,12 @@ module.factory(
           url: urlBase + "/Usuarios/:id/estadoCivil",
           method: "GET"
         },
+
+        // INTERNAL. Use Practicante.estadoCivil() instead.
+        "::get::Practicante::estadoCivil": {
+          url: urlBase + "/Practicantes/:id/estadoCivil",
+          method: "GET"
+        },
       }
     );
 
@@ -9061,10 +8758,6 @@ module.factory(
  * @description
  *
  * A $resource object for interacting with the `Pais` model.
- *
- * **Details**
- *
- * Paises y nacionalidades
  *
  * ## Example
  *
@@ -9508,6 +9201,12 @@ module.factory(
           url: urlBase + "/Usuarios/:id/pais",
           method: "GET"
         },
+
+        // INTERNAL. Use Practicante.pais() instead.
+        "::get::Practicante::pais": {
+          url: urlBase + "/Practicantes/:id/pais",
+          method: "GET"
+        },
       }
     );
 
@@ -9663,10 +9362,6 @@ module.factory(
  * @description
  *
  * A $resource object for interacting with the `Evento` model.
- *
- * **Details**
- *
- * Evento programado
  *
  * ## Example
  *
@@ -10952,7 +10647,7 @@ module.factory(
 
 module
   .factory('LoopBackAuth', function() {
-    var props = ['accessTokenId', 'currentUserId', 'rememberMe'];
+    var props = ['accessTokenId', 'currentUserId'];
     var propsPrefix = '$LoopBack$';
 
     function LoopBackAuth() {
@@ -10960,6 +10655,7 @@ module
       props.forEach(function(name) {
         self[name] = load(name);
       });
+      this.rememberMe = undefined;
       this.currentUserData = null;
     }
 
@@ -11013,9 +10709,8 @@ module
       return {
         'request': function(config) {
 
-          // filter out external requests
-          var host = getHost(config.url);
-          if (host && host !== urlBaseHost) {
+          // filter out non urlBase requests
+          if (config.url.substr(0, urlBase.length) !== urlBase) {
             return config;
           }
 
@@ -11083,7 +10778,6 @@ module
      */
     this.setUrlBase = function(url) {
       urlBase = url;
-      urlBaseHost = getHost(urlBase) || location.host;
     };
 
     /**

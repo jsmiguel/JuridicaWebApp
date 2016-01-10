@@ -6,32 +6,40 @@
           <input placeholder="Buscar..." type="text" ng-model="txtBuscar"><i class="inverted circular search link icon"></i>
         </div>
 
-        <table class="ui unstackable striped table">
+        <table class="ui stackable striped table">
             <thead>
                 <tr>
-                    <th>Nombres</th>
-                    <th>Apellidos</th>
+                    <th>Carnet</th>
+                    <th>Nombre</th>
                     <th>Género</th>
                     <th>Estado Civil</th>
+                    <th>Nacionalidad</th>
                     <th>Opciones</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="practicante in practicantes | filter:txtBuscar">
+                <tr ng-repeat="practicante in vm.practicantes | filter:txtBuscar">
                     <td>
-                        {{practicante.nombres}}
+                        {{practicante.carnet}}
                     </td>
                     <td>
-                        {{practicante.apellidos}}
+                        {{practicante.nombres +' '+practicante.apellidos}}
                     </td>
                     <td>
                         {{practicante.genero}}
                     </td>
                     <td>
-                        {{practicante.estadoFamiliar.nombre}}
+                        {{practicante.estadoCivil.nombre}}
                     </td>
                     <td>
-                        Editar
+                        {{practicante.pais.nacionalidad}}
+                    </td>
+                    <td>
+                        <i class="search icon link" ui-sref="detallePracticante({ id: practicante.id })">
+                            <md-tooltip md-direction="bottom">
+                                Detalle
+                            </md-tooltip>
+                        </i>
                     </td>
                 </tr>
             </tbody>
@@ -39,10 +47,10 @@
                 <tr>
                   <th>
                      <div class="ui">
-                      Total de registros: {{practicantes.length}}
+                      Total de registros: {{vm.practicantes.length}}
                     </div> 
                   </th>
-                  <th colspan="4">
+                  <th colspan="5">
                     <a ui-sref="nuevoPracticante">
                         <div class="ui right floated small primary labeled icon button">
                           <i class="user icon"></i> Agregar practicante

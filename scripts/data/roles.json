@@ -1,17 +1,21 @@
 [  
-   {  
+   {
+      "id":"1",
       "nombre":"admin",      
       "esActivo":true
    },
    {  
+      "id":"2",
       "nombre":"coordinador",
       "esActivo":true
    },
    {  
+      "id":"3",
       "nombre":"asesor",
       "esActivo":true
    },
    {  
+      "id":"4",
       "nombre":"practicante",
       "esActivo":true
    }

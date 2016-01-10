@@ -12,15 +12,19 @@
     <form id="form-practicantes" ng-submit="crearPracticante()" class="ui form">
       <div id="tab1" data-tab="infopersonal" class="ui active tab">
         <div class="four fields">
-          <div class="field">
+          <div class="required field">
+            <label>Carnet</label>
+            <input placeholder="Carnet" autocomplete="off" type="text" name="carnet" ng-model="formData.carnet"/>
+          </div>
+          <div class="required field">
             <label>Nombres</label>
             <input placeholder="Nombres" autocomplete="off" type="text" name="nombres" ng-model="formData.nombres"/>
           </div>
-          <div class="field">
+          <div class="required field">
             <label>Apellidos</label>
             <input placeholder="Apellidos" autocomplete="off" type="text" name="apellidos" ng-model="formData.apellidos"/>
           </div>
-          <div class="field">
+          <div class="required field">
             <label>Genero</label>
             <select name="genero" ng-model="formData.genero" class="ui dropdown">
               <option value="">Seleccione</option>
@@ -28,55 +32,48 @@
               <option value="Femenino">Femenino</option>
             </select>
           </div>
-          <div class="field">
+        </div>
+        <div class="four fields">
+          <div class="required field">
             <label>Estado Civil</label>
             <select name="estadoCivil" ng-model="formData.estadoCivilId" class="ui dropdown">
               <option value="">Seleccione</option>
-              <option ng-repeat="estado in estadoCivil" value="{{estado.id}}">{{estado.nombre}}</option>
+              <option ng-repeat="estado in estadoCivil | orderBy: 'nombre'" value="{{estado.id}}">{{estado.nombre}}</option>
             </select>
           </div>
-        </div>
-        <div class="four fields">
-          <div class="field">
+          <div class="required field">
             <label>País</label>
             <select name="pais" ng-model="formData.paisId" autocomplete="off" class="ui dropdown">
               <option value="">Seleccione</option>
-              <option ng-repeat="pais in paises" value="{{pais.id}}">{{pais.nombre}}</option>
+              <option ng-repeat="pais in paises | orderBy: 'nombre'" value="{{pais.id}}">{{pais.nombre}}</option>
             </select>
           </div>
           <div class="required six wide field">
             <label> Fecha de Nacimiento</label>
             <jm-date name="birthdate" ng-model="formData.fechaNac" min-years-old="18" max-years-old="80" year-order="desc"></jm-date>
           </div>
-          <div class="field">
-            <label>Tipo Documento</label>
-            <select ng-model="formData.tipoDocumentoId" autocomplete="off" name="tipoDocumento" id="tipoDocumento" class="ui dropdown">
-              <option value="">Seleccione</option>
-              <option ng-repeat="tipo in tiposDocumento" value="{{tipo.id}}">{{tipo.nombre}}</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Num. Documento</label>
-            <input placeholder="Num. Documento" autocomplete="off" type="text" name="numDocumento" ng-model="formData.numDocumento"/>
+          <div class="required field">
+            <label>DUI</label>
+            <input placeholder="Número" autocomplete="off" type="text" name="numDocumento" ng-model="formData.numDocumento"/>
           </div>
         </div>
-        <div class="field">
-          <label>Residencia</label>
+        <div class="required field">
+          <label>Dirección</label>
           <div class="field">
-            <textarea type="text" rows="2" autocomplete="off" name="residencia" ng-model="formData.contacto.residencia"></textarea>
+            <textarea type="text" rows="2" autocomplete="off" name="direccion" ng-model="formData.direccion"></textarea>
           </div>
         </div>
         <div class="two fields">
           <div class="field">
             <label>Telefono (Casa)</label>
             <div class="field">
-              <input type="text" autocomplete="off" name="telefono" ng-model="formData.contacto.telefono"/>
+              <input type="text" autocomplete="off" name="telefono" ng-model="formData.telefono"/>
             </div>
           </div>
-          <div class="field">
+          <div class="required field">
             <label>Telefono (Movil)</label>
             <div class="field">
-              <input type="text" autocomplete="off" name="movil" ng-model="formData.contacto.movil"/>
+              <input type="text" autocomplete="off" name="movil" ng-model="formData.movil"/>
             </div>
           </div>
         </div>
@@ -86,23 +83,23 @@
         <div class="field">
           <label>Lugar de trabajo</label>
           <div class="field">
-            <input type="text" name="lugarTrabajo" ng-model="formData.infoLaboral.lugarTrabajo"/>
+            <input autocomplete="off" type="text" name="lugarTrabajo" ng-model="formData.lugarTrabajo"/>
           </div>
         </div>
         <div class="field">
           <label>Direccion de trabajo</label>
           <div class="field">
-            <textarea type="text" rows="2" nname="dirTrabajo" ng-model="formData.infoLaboral.dirTrabajo"></textarea>
+            <textarea type="text" rows="2" nname="dirTrabajo" ng-model="formData.dirTrabajo"></textarea>
           </div>
         </div>
         <div class="two fields">                   
           <div class="field">
             <label>Horario de entrada</label>
-            <input type="text" placeholder="Entrada" ng-model="horario_trabajo_ini" class="form-control input-small"/>
+            <input autocomplete="off" type="text" placeholder="Entrada" ng-model="horario_trabajo_ini" class="form-control input-small"/>
           </div>
           <div class="field">
             <label>Horario de salida</label>
-            <input type="text" placeholder="Salida" ng-model="horario_trabajo_fin" class="form-control input-small"/>
+            <input autocomplete="off" type="text" placeholder="Salida" ng-model="horario_trabajo_fin" class="form-control input-small"/>
           </div>
         </div>
         <button class="ui labeled icon button to-tab1">

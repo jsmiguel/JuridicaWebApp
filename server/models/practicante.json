@@ -7,6 +7,17 @@
     "validateUpsert": true
   },
   "properties": {
+    "carnet": {
+      "type": "string",
+      "required": true,
+      "index": {
+        "unique": true
+      },
+      "mysql": {
+        "dataType": "varchar",
+        "dataLength": 8
+      }
+    },
     "nombres": {
       "type": "string",
       "required": true
@@ -37,18 +48,50 @@
     },
     "numDocumento": {
       "type": "string",
-      "required": true
+      "required": true,
+      "index": {
+        "unique": true
+      },
+      "mysql": {
+        "dataType": "varchar",
+        "dataLength": 10
+      }
+    },
+    "esActivo": {
+      "type": "boolean"
+    },
+    "creado": {
+      "type": "date"
+    },
+    "actualizado": {
+      "type": "date"
+    },
+    "paisId":{
+      "type": "number",
+      "required": true,
+      "mysql": {
+        "dataType": "integer"
+      }
+    },
+    "estadoCivilId":{
+      "type": "number",
+      "required": true,
+      "mysql": {
+        "dataType": "integer"
+      }
     }
   },
   "validations": [],
   "relations": {
-    "cuenta": {
+    "pais": {
       "type": "belongsTo",
-      "model": "Cuenta"
+      "model": "Pais",
+      "foreignKey": "paisId"
     },
-    "tipoDocumento": {
+    "estadoCivil": {
       "type": "belongsTo",
-      "model": "TipoDocumento"
+      "model": "EstadoCivil",
+      "foreignKey": "estadoCivilId"
     }
   },
   "acls": [],

@@ -53,7 +53,8 @@
                     {
                       name: 'expedientes',
                       files: [
-                        './app/expedientes/expedientes.controller.js'
+                        './app/expedientes/expedientes.controller.js',
+                        './app/practicantes/practicantes.controller.js'
                       ],
                       cache: false
                     },

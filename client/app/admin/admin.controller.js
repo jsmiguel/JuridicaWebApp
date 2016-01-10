@@ -105,58 +105,87 @@
 
         vm.cerrar = function() {
           $mdDialog.hide();
-          return false;
+          return;
         };
         vm.cancelar = function() {
           $mdDialog.cancel();
-          return false;
+          return;
         };
-        vm.procesar = function($event) {
-          $event.preventDefault();
+        vm.procesar = function() {
           if (!$.isEmptyObject(vm.formData)) {
             //$log.debug(vm.formData);
             // call the create function from our service (returns a promise object)
-            vm.formData.cuenta.rolId = vm.rolId;
-            vm.formData.cuenta.created = new Date();
-            vm.formData.cuenta.esActivo = true;
-            
-            Cuenta.create(vm.formData.cuenta,
-              function(cuenta) {
-                
-                $log.debug(cuenta);
-                vm.formData.colaborador.cuentaId = cuenta.id;
+            Cuenta
+            .find({
+                filter: {   
+                  where: { 
+                    username: vm.formData.cuenta.username
+                  }
+                }
+              })
+            .$promise
+            .then(function(respose) {
+              //success
 
-                Colaborador.create(vm.formData.colaborador,
-                  function(colaborador) {
-                    $log.debug(colaborador);
-                    // success
-                    $mdToast.show(
-                      $mdToast.simple()
-                      .content('Creado satisfactoriamente!')
-                      .position('right')
-                      .hideDelay(3000));
-                    $state.transitionTo($state.current, $stateParams, {
-                        reload: true,
-                        inherit: false,
-                        notify: true
-                    });
-                  },
-                  function(error) {
-                    $log.debug(error);
-                  });
-                
-                $mdDialog.cancel();
-                
-              }, function(err) {                      
-                $log.debug(err);
-                // error
+              if (respose.length>0) {
+
                 $mdToast.show(
-                $mdToast.simple()
-                    .content('Error al guardar Colaborador')
-                    .position('right')
-                    .hideDelay(3000)
-                );
-              });
+                  $mdToast.simple()
+                  .content('El carnet ingresado, ya existe!')
+                  .position('right')
+                  .hideDelay(3000));
+
+                return;
+              };
+
+              vm.formData.cuenta.rolId = vm.rolId;
+              vm.formData.cuenta.created = new Date();
+              vm.formData.cuenta.esActivo = true;
+            
+              Cuenta.create(vm.formData.cuenta,
+                function(cuenta) {
+                  
+                  $log.debug(cuenta);
+                  vm.formData.colaborador.cuentaId = cuenta.id;
+
+                  Colaborador.create(vm.formData.colaborador,
+                    function(colaborador) {
+                      $log.debug(colaborador);
+                      // success
+                      $mdToast.show(
+                        $mdToast.simple()
+                        .content('Creado satisfactoriamente!')
+                        .position('right')
+                        .hideDelay(3000));
+                      $state.transitionTo($state.current, $stateParams, {
+                          reload: true,
+                          inherit: false,
+                          notify: true
+                      });
+                    },
+                    function(error) {
+                      $log.debug(error);
+                    });
+                  
+                  $mdDialog.cancel();
+                  
+                }, function(err) {                      
+                  $log.debug(err);
+                  // error
+                  $mdToast.show(
+                  $mdToast.simple()
+                      .content('Error al guardar Colaborador')
+                      .position('right')
+                      .hideDelay(3000)
+                  );
+                });
+              
+            }, function (err) {
+              // error
+
+            });
+
+            
           }
           return false;
         }

@@ -2,8 +2,8 @@
     <div>
         <h3 class="ui dividing header">Administrar</h3>
 
-        <div layout-padding layout="row" layout-wrap layout-align="center start" layout-xs="column">
-            <div flex="60" flex-xs="100" layout="column">
+        <div layout-padding layout="row" layout-wrap layout-align="center start" layout-xs="column" layout-sm="column">
+            <div flex="60" flex-xs="100" flex-sm="100" layout="column">
                 <md-card class="md-padding">
                     <md-card-header>
                       <md-card-header-text>
@@ -43,7 +43,30 @@
                         </table>
                     </md-card-content>
                     <md-card-actions layout="row" layout-align="end center">
-                      <md-button ng-click="vm.addColaborador($event, 'asesor')">Agregar</md-button>
+                      <!-- <md-button ng-click="vm.addColaborador($event, 'asesor')">Agregar</md-button> -->
+                      <md-menu md-position-mode="target-right target" >
+                        <md-button aria-label="Opciones" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                          <md-icon md-menu-origin>more_vert</md-icon>
+                        </md-button>
+                        <md-menu-content width="3" >
+                          <md-menu-item >
+                            <md-button ng-click="vm.addColaborador($event, 'asesor')">
+                                <div layout="row">
+                                  <p flex>Agregar</p>
+                                  <md-icon md-menu-align-target style="margin: auto 3px auto 0;">person_add</md-icon>
+                                </div>
+                            </md-button>
+                          </md-menu-item>
+                          <!-- <md-menu-item >
+                            <md-button ng-click="">
+                                <div layout="row">
+                                  <p flex>Generar PDF</p>
+                                  <md-icon md-menu-align-target style="margin: auto 3px auto 0;">print</md-icon>
+                                </div>
+                            </md-button>
+                          </md-menu-item> -->
+                        </md-menu-content>
+                      </md-menu>
                     </md-card-actions>
                 </md-card>
                 <md-card class="md-padding">
@@ -85,11 +108,34 @@
                       </table>
                     </md-card-content>
                     <md-card-actions layout="row" layout-align="end center">
-                      <md-button ng-click="vm.addColaborador($event, 'coordinador')">Agregar</md-button>
+                      <!-- <md-button ng-click="vm.addColaborador($event, 'coordinador')">Agregar</md-button> -->
+                      <md-menu md-position-mode="target-right target" >
+                        <md-button aria-label="Opciones" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                          <md-icon md-menu-origin>more_vert</md-icon>
+                        </md-button>
+                        <md-menu-content width="3" >
+                          <md-menu-item >
+                            <md-button ng-click="vm.addColaborador($event, 'coordinador')">
+                                <div layout="row">
+                                  <p flex>Agregar</p>
+                                  <md-icon md-menu-align-target style="margin: auto 3px auto 0;">person_add</md-icon>
+                                </div>
+                            </md-button>
+                          </md-menu-item>
+                          <!-- <md-menu-item >
+                            <md-button ng-click="">
+                                <div layout="row">
+                                  <p flex>Generar PDF</p>
+                                  <md-icon md-menu-align-target style="margin: auto 3px auto 0;">print</md-icon>
+                                </div>
+                            </md-button>
+                          </md-menu-item> -->
+                        </md-menu-content>
+                      </md-menu>
                     </md-card-actions>
                 </md-card>
             </div>
-            <div flex="40" flex-xs="100" layout="column">
+            <div flex="40" flex-xs="100" flex-sm="100" layout="column">
                 <md-card class="md-padding">
                     <md-card-header>
                       <md-card-header-text>
@@ -98,7 +144,7 @@
                       </md-card-header-text>
                     </md-card-header>
                     <md-card-content>
-                        <table class="ui very basic single line stackable table">
+                        <table class="ui very basic single line table">
                             <tbody>
                                 <tr ng-repeat="item in tiposDocumento">
                                   <td>{{item.nombre}}</td>
@@ -126,7 +172,7 @@
                       </md-card-header-text>
                     </md-card-header>
                     <md-card-content>
-                      <table class="ui very basic single line stackable table">
+                      <table class="ui very basic single line table">
                             <tbody>
                                 <tr ng-repeat="item in servicios">
                                   <td>{{item.nombre}}</td>

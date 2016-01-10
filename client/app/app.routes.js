@@ -28,6 +28,7 @@
 	      		url: '/practicantes',
         		templateUrl: './app/practicantes/practicantes.html',
         		controller: 'PracticantesCtrl',
+        		controllerAs: 'vm',
         		resolve : {
 	        		loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
                                     return $ocLazyLoad.load('practicantes');
@@ -38,6 +39,13 @@
 		    	url: '/practicantes/form',
 		        templateUrl: './app/practicantes/agregar.practicante.html',
 		        controller: 'NuevoPracticanteCtrl'
+		    })
+
+		    .state('detallePracticante', {
+		    	url: '/practicantes/detalle/:id',
+		        templateUrl: './app/practicantes/detalle.practicante.html',
+		        controller: 'DetallePracticanteCtrl',
+		        controllerAs: 'vm'
 		    })
 
 		    //Usuarios Routes
@@ -60,6 +68,7 @@
 		    	url: '/usuarios/:id',
 		        templateUrl: './app/usuarios/detalle.usuario.html',
 		        controller: 'DetalleUsuarioCtrl',
+		        controllerAs: 'vm',
 		        resolve : {
 	        		loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
                                     return $ocLazyLoad.load('detalleUsuario');
@@ -72,6 +81,7 @@
 		    	url: '/solicitudes',
 		        templateUrl: './app/solicitudes/solicitudes.html',
 		        controller: 'SolicitudesCtrl',
+		        controllerAs: 'vm',
 		        resolve : {
 	        		loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
                                     return $ocLazyLoad.load('solicitudes');
@@ -81,12 +91,14 @@
 		    .state('detalleSolicitud', {
 		    	url: '/solicitudes/detalle/:id',
 		        templateUrl: './app/solicitudes/detalle.solicitud.html',
-		        controller: 'DetalleSolicitudCtrl'
+		        controller: 'DetalleSolicitudCtrl',
+		        controllerAs: 'vm'
 		    })
 		    .state('nuevaSolicitud', {
 		    	url: '/solicitudes/form/:id',
 		        templateUrl: './app/solicitudes/agregar.solicitud.html',
 		        controller: 'NuevaSolicitudCtrl',
+		        controllerAs: 'vm',
 		        resolve : {
 	        		loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
                                     return $ocLazyLoad.load('nuevaSolicitud');
@@ -99,6 +111,7 @@
 		    	url: '/expedientes',
 		        templateUrl: './app/expedientes/expedientes.html',
 		        controller: 'ExpedientesCtrl',
+		        controllerAs: 'vm',
 		        resolve : {
 	        		loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
                                     return $ocLazyLoad.load('expedientes');
@@ -109,19 +122,10 @@
 		    	url: '/expedientes/detalle/:id',
 		        templateUrl: './app/expedientes/detalle.expediente.html',
 		        controller: 'DetalleExpedienteCtrl',
+		        controllerAs: 'vm',
 		        resolve : {
 	        		loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
                                     return $ocLazyLoad.load('detalleExpediente');
-                                }]
-	        	}
-		    })
-		    .state('nuevoExpediente', {
-		    	url: '/expedientes/form/:id',
-		        templateUrl: './app/expedientes/agregar.expediente.html',
-		        controller: 'NuevoExpedienteCtrl',
-		        resolve : {
-	        		loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
-                                    return $ocLazyLoad.load('nuevoExpediente');
                                 }]
 	        	}
 		    })

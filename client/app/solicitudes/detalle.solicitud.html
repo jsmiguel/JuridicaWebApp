@@ -9,26 +9,15 @@
                   </md-tooltip>
                 </md-button>
                 <i class="material-icons">assignment</i>
-                <span style="padding-left:10px;">Solicitud #{{ solicitud.numero }}</span>
+                <span style="padding-left:10px;">Solicitud No: {{ vm.solicitud.numero }}</span>
+                <div ng-if="vm.solicitud.esAprobado == null" class="ui blue horizontal label" style="margin-left:10px;">En progreso</div>
+                <div ng-if="vm.solicitud.esAprobado" class="ui green horizontal label" style="margin-left:10px;">Aprobada</div>
+                <div ng-if="vm.solicitud.esAprobado == false" class="ui red horizontal label" style="margin-left:10px;">Reprobada</div>
                 <div class="mdl-layout-spacer"></div>
-                <!-- <md-button>Nueva solicitud</md-button> -->
-                <md-fab-speed-dial  md-direction="left" md-open="fab.isOpen" class="md-scale" ng-mouseenter="fab.isOpen=true" ng-mouseleave="fab.isOpen=false">
-                    <md-fab-trigger>
-                      <md-button class="md-fab md-mini">
-                        <md-icon>menu</md-icon>
-                      </md-button>
-                    </md-fab-trigger>
-                    <md-fab-actions>
-                      <md-button ng-click="nuevoExpediente(solicitud.id)" class="md-fab md-mini">
-                        <md-tooltip md-direction="down">Nuevo expediente</md-tooltip>
-                        <md-icon>folder_shared</md-icon>
-                      </md-button>
-                      <md-button class="md-fab md-mini">
-                        <md-tooltip md-direction="down">Imprimir detalle</md-tooltip>
-                        <md-icon>print</md-icon>
-                      </md-button>
-                    </md-fab-actions>
-                </md-fab-speed-dial>
+                <md-button ng-click="vm.editable = true;" class="md-fab md-mini">
+                  <md-tooltip md-direction="down">Editar</md-tooltip>
+                  <md-icon>create</md-icon>
+                </md-button>
             </div>
         </md-toolbar>
         <md-card-content>
@@ -36,53 +25,61 @@
                 <form name="solicitudForm">
                   <div class="ui fluid card">
                     <div class="content">
-                      <a class="header" ui-sref="detalleUsuario({ id: solicitud.usuario.id })">
+                      <a class="header" ui-sref="detalleUsuario({ id: vm.solicitud.usuario.id })">
                         <i class="user icon"></i>
-                        {{solicitud.usuario.nombres + ' '+ solicitud.usuario.apellidos}}
+                        {{vm.usuario.nombres + ' '+ vm.usuario.apellidos}}
                       </a>
                       <div class="meta">
-                        {{solicitud.usuario.profesion}}
+                        {{vm.usuario.profesion}}
                       </div>
                       <div class="description">
-                        <p>Número de integrantes en núcleo familiar: {{solicitud.usuario.numFamiliares}}</p>
-                        <p>Ingresos familiares: {{solicitud.usuario.ingresosFamiliares}}</p>
-                        <p>Solicita servicio de: {{solicitud.servicio.nombre}}</p>
+                        <p>Número de integrantes en núcleo familiar: {{vm.usuario.numFamiliares}}</p>
+                        <p>Ingresos familiares: {{vm.usuario.ingresosFamiliares | currency}}</p>
+                        <p>Solicita servicio de: {{vm.servicio}}</p>
+                        <p ng-if="vm.solicitud.esAprobado == false" class="ui basic red label">Rechazado por: {{vm.solicitud.motivo.nombre}}, el {{vm.solicitud.fechaCierre | date : 'dd/MM/yyyy'}}</p>
                       </div>
                     </div>
-                    <div class="extra content">
-                      <button class="ui green button">
+                    <div ng-if="vm.solicitud.esAprobado==null" class="extra content">
+                      <button ng-click="vm.crearExpediente($event, vm.solicitud.id)" class="ui green button">
                         <i class="check icon"></i>
-                        Aprobar</button>
-                      <button class="ui button">
+                        Aprobar
+                      </button>
+                      <button class="ui button" ng-click="vm.showForm($event, vm.solicitud.id)">
                         <i class="remove icon"></i>
-                        Denegar</button>
-                        </span>
+                        Denegar
+                      </button>
                     </div>
                   </div>
                     <h3 class="ui dividing header">Detalle de la solicitud</h3>
                     <div layout="column" layout-sm="column">
                         <md-input-container class="md-block">
                           <label>Descripción del problema</label>
-                          <textarea ng-model="solicitud.descripcionProblema" columns="1" md-maxlength="250"></textarea>
+                          <textarea autocomplete="off" ng-readonly="!vm.editable" ng-model="vm.solicitud.descripcionProblema" columns="1" md-maxlength="250" maxlength="250"></textarea>
                         </md-input-container>
                         <md-input-container class="md-block">
                           <label>Hechos Expuestos</label>
-                          <textarea ng-model="solicitud.hechosExpuestos" columns="1" md-maxlength="250"></textarea>
+                          <textarea autocomplete="off" ng-readonly="!vm.editable" ng-model="vm.solicitud.hechosExpuestos" columns="1" md-maxlength="250" maxlength="250"></textarea>
                         </md-input-container>
                         <md-input-container class="md-block">
                           <label>Asesoría brindada</label>
-                          <textarea ng-model="solicitud.asesoriaBrindada" columns="1" md-maxlength="250"></textarea>
+                          <textarea autocomplete="off" ng-readonly="!vm.editable" ng-model="vm.solicitud.asesoriaBrindada" columns="1" md-maxlength="250" maxlength="250"></textarea>
                         </md-input-container>
                         <md-input-container>
                           <label>Documentos solicitados</label>
-                          <input ng-model="solicitud.docSolicitados">
+                          <input autocomplete="off" ng-readonly="!vm.editable" ng-model="vm.solicitud.docSolicitados">
                         </md-input-container>
                     </div> 
                 </form>  
             </md-content>
+            <span>Última actualización: {{vm.solicitud.actualizado ? vm.solicitud.actualizado : vm.solicitud.creado | date : 'dd/MM/yyyy'}}</span>
         </md-card-content>
-        <md-card-footer>
-        Fecha de creación: {{solicitud.fecha | date : 'dd/MM/yyyy'}}
+        <md-card-footer ng-if="vm.editable" layout="row" layout-align="end center">
+          <md-button ng-click="vm.editable = false;">
+            Cancelar
+          </md-button>
+          <md-button ng-click="vm.updateUsuario()" style="margin-right:20px;">
+            Guardar
+          </md-button>
         </md-card-footer>
     </md-card>
 </div>

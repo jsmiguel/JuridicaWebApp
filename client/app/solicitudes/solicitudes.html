@@ -5,7 +5,7 @@
       <input placeholder="Buscar..." type="text" ng-model="txtBuscar"><i class="inverted circular search link icon"></i>
     </div>
 
-	<table class="ui unstackable striped table">
+	<table class="ui stackable striped table">
         <thead>
             <tr>
                 <th>Número</th>
@@ -19,7 +19,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="solicitud in solicitudes | filter:txtBuscar">
+            <tr ng-repeat="solicitud in vm.solicitudes | filter:txtBuscar">
                 <td>
                     {{solicitud.numero}}
                 </td>
@@ -36,13 +36,15 @@
                     {{solicitud.servicio.nombre}}
                 </td>
                 <td>
-                    {{solicitud.fecha | date : 'dd/MM/yyyy'}}
+                    {{solicitud.creado | date : 'dd/MM/yyyy'}}
                 </td>
                 <td>
-                    {{solicitud.estado ? 'Aprobada': 'En Proceso'}}
+                    <div ng-if="solicitud.esAprobado == null" class="ui blue horizontal label">En progreso</div>
+                    <div ng-if="solicitud.esAprobado" class="ui green horizontal label">Aprobada</div>
+                    <div ng-if="solicitud.esAprobado == false" class="ui red horizontal label">Reprobada</div>
                 </td>
                 <td>
-                    <i class="search icon link" ui-sref="detalleSolicitud(solicitud.id)">
+                    <i class="search icon link" ui-sref="detalleSolicitud({ id: solicitud.id })">
                         <md-tooltip md-direction="bottom">
                             Detalle
                         </md-tooltip>
@@ -54,7 +56,7 @@
             <tr>
               <th colspan="8"
                  <div class="ui">
-                  Total de registros: {{ solicitudes.length }}
+                  Total de registros: {{ vm.solicitudes.length }}
                 </div> 
               </th>
             </tr>

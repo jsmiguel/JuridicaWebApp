@@ -18,13 +18,21 @@
     },
     "telefono": {
       "type": "string"
+    },
+    "cuentaId":{
+      "type": "number",
+      "required": true,
+      "mysql": {
+        "dataType": "integer"
+      }
     }
   },
   "validations": [],
   "relations": {
     "cuenta": {
       "type": "belongsTo",
-      "model": "Cuenta"
+      "model": "Cuenta",
+      "foreignKey": "cuentaId"
     }
   },
   "acls": [],

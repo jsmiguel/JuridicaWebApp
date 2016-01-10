@@ -15,21 +15,41 @@
         Cuenta.login($scope.credentials,
         function(token) {
           // success
-          var next = $location.nextAfterLogin || '/';
 
-          // Set the stringified user data into local storage         
-          //localStorage.setItem('account', account);
+          if (!token.user.esActivo){
+            $mdToast.show(
+              $mdToast.simple()
+                .content('Error al iniciar sesión')
+                .position('right')
+                .hideDelay(3000)
+            );
 
-          $rootScope.account = token.user;
-          $rootScope.token = token.id;
-          $rootScope.authenticated = true;
+            Cuenta
+              .logout({
+                id: token.id
+              })
+              .$promise
+              .then(function(response) {
+                $location.path('/login');
+              });
 
-          $window.sessionStorage["authenticated"] = true;
-          $window.sessionStorage["account"] = token.user;
-          $window.sessionStorage["token"] = token.id;
+          } else {
+            var next = $location.nextAfterLogin || '/';
 
-          $location.nextAfterLogin = null;
-          $location.path(next);
+            // Set the stringified user data into local storage         
+
+            $rootScope.account = token.user;
+            $rootScope.token = token.id;
+            $rootScope.authenticated = true;
+
+            //localStorage.setItem('account', JSON.stringify(token.user));
+            $window.sessionStorage["account"] = JSON.stringify(token.user);
+            $window.sessionStorage["token"] = token.id;
+
+            $location.nextAfterLogin = null;
+            $location.path(next);
+          }
+
         }, function(res) {
           // error
           $mdToast.show(

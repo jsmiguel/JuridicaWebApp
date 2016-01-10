@@ -1,0 +1,58 @@
+<md-dialog aria-label="dialog-colaborador">
+    <md-toolbar class="md-primary md-hue-2">
+      <div class="md-toolbar-tools white-text">
+        <h2>Cierra de expediente</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="formCtrl.cerrar()">
+          <md-icon style="color: white" aria-label="Cerrar diálogo">close</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+      <md-dialog-content style="min-width:450px;" flex layout-padding>     
+          <div>
+            <form name="cierre-form" ng-submit="$event.preventDefault();" novalidate>
+                <md-input-container class="md-block">
+                  <label>Observaciones</label>
+                  <textarea ng-model="vm.formData.observaciones" columns="1" maxlength="350" md-maxlength="350"></textarea>
+                  <div class="errors" ng-messages="cierre-form.observaciones.$error" ng-if="observaciones.$dirty">
+                    <div ng-message="required">Requerido</div>
+                  </div>
+                </md-input-container>
+            </form>
+            <div class="md-actions" layout="row">
+              <md-button ng-click="formCtrl.cancelar()">
+                Cancelar
+              </md-button>
+              <md-button ng-click="formCtrl.procesar($event)" style="margin-right:20px;">
+                Cerrar expediente
+              </md-button>
+            </div>
+         </div>
+      </md-dialog-content>
+</md-dialog>
+
+
+<script>
+    //validaciones del formulario     
+  $('#form-colaborador')
+    .form({
+      fields: {
+          carnet: {
+              identifier : 'carnet',
+              rules: [
+              {
+                  type   : 'empty',
+                  prompt : 'Por favor introduzca el carnet de identificación'
+              },
+              {
+                type:'regExp[/^([A-Za-z]{2})([0-9]{6})$/]',
+                prompt : 'Introduzca el formato correcto'
+              }
+              ]
+          }
+      },
+      inline : true,
+      on     : 'blur'
+    })
+  ;
+</script>

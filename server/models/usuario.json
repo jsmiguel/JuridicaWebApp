@@ -119,21 +119,51 @@
         "dataType": "varchar",
         "dataLength": 250
       }
+    },
+    "creado": {
+      "type": "date"
+    },
+    "actualizado": {
+      "type": "date"
+    },
+    "paisId":{
+      "type": "number",
+      "required": true,
+      "mysql": {
+        "dataType": "integer"
+      }
+    },
+    "tipoDocumentoId":{
+      "type": "number",
+      "required": true,
+      "mysql": {
+        "dataType": "integer"
+      }
+    },
+    "estadoCivilId":{
+      "type": "number",
+      "required": true,
+      "mysql": {
+        "dataType": "integer"
+      }
     }
   },
   "validations": [],
   "relations": {
     "tipoDocumento": {
       "type": "belongsTo",
-      "model": "TipoDocumento"
+      "model": "TipoDocumento",
+      "foreignKey": "tipoDocumentoId"
     },
     "pais": {
       "type": "belongsTo",
-      "model": "Pais"
+      "model": "Pais",
+      "foreignKey": "paisId"
     },
     "estadoCivil": {
       "type": "belongsTo",
-      "model": "EstadoCivil"
+      "model": "EstadoCivil",
+      "foreignKey": "estadoCivilId"
     },
     "solicitudes": {
       "type": "hasMany",

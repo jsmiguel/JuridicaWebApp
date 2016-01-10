@@ -1,4 +1,22 @@
 'use strict';
+(function(){
+
+function calculateAge (birthday) {
+  var birthday = new Date(birthday);
+  var today = new Date();
+  var years = today.getFullYear() - birthday.getFullYear();
+
+  // Reset birthday to the current year.
+  birthday.setFullYear(today.getFullYear());
+
+  // If the user's birthday has not occurred yet this year, subtract 1.
+  if (today < birthday)
+  {
+      years--;
+  }
+
+  return years+' años';
+}
 
 angular.module('juridicaWebApp')
   .filter('offset', function() {
@@ -7,121 +25,33 @@ angular.module('juridicaWebApp')
       return input.slice(start);
     };
   })
-  .controller('PracticantesCtrl', function ($scope, $rootScope, Practicante) {
-        $scope.itemsPerPage = 8;
-        $scope.currentPage = 0;
-        $scope.practicantes = [];
+  .controller('PracticantesCtrl', function ($log, $scope, $rootScope, Practicante, EstadoCivil) {
+        var vm = this;
+        vm.sortKey = '';
+        vm.reverse = '';
+        vm.practicantes = [];
 
         Practicante
-          .find()
-          .$promise
-          .then(function(data) {
-            $scope.practicantes = data;
-          });
-
-        $scope.prevPage = function() {
-          if ($scope.currentPage > 0) {
-            $scope.currentPage--;
-          }
-        };
-
-        $scope.prevPageDisabled = function() {
-          return $scope.currentPage === 0 ? "disabled" : "";
-        };
-
-        $scope.pageCount = function() {
-          return Math.ceil($scope.estadoFamiliar.length/$scope.itemsPerPage)-1;
-        };
-
-        $scope.nextPage = function() {
-          if ($scope.currentPage < $scope.pageCount()) {
-            $scope.currentPage++;
-          }
-        };
-
-        $scope.nextPageDisabled = function() {
-          return $scope.currentPage === $scope.pageCount() ? "disabled" : "";
-        };
-
-        $scope.setPage = function(n) {
-          $scope.currentPage = n;
-        };
-
-        $scope.range = function() {
-          var rangeSize = 4;
-          var ret = [];
-          var start;
-
-          start = $scope.currentPage;
-          if ( start > $scope.pageCount()-rangeSize ) {
-            start = $scope.pageCount()-rangeSize+1;
-          }
-
-          for (var i=start+1; i<start+rangeSize; i++) {
-            ret.push(i);
-          }
-          return ret;
-        };
-
-        $scope.sort = function(keyname){
-          $scope.sortKey = keyname;   //set the sortKey to the param passed
-          $scope.reverse = !$scope.reverse; //if true make it false and vice versa
-        };
-        $scope.showForm = function($event) {
-          var parentEl = angular.element(document.body);
-          $mdDialog.show({
-            parent: parentEl,
-            targetEvent: $event,
-            templateUrl:'app/practicantes/form.html',
-            controller: DialogController
-          });
-          function DialogController($scope, $rootScope, $mdDialog, $mdToast,$location, Practicante) {
-            $scope.cerrar = function() {
-              $mdDialog.hide();
-            };
-            $scope.cancelar = function() {
-              $mdDialog.cancel();
-            };
-            $scope.guardarPracticante = function() {
-              if (!$.isEmptyObject($scope.formData)) {
-
-                // call the create function from our service (returns a promise object)
-                Practicante.crear($scope.formData)
-                  .success(function() {
-                    $mdToast.show(
-                      $mdToast.simple()
-                        .content('Creado satisfactoriamente!')
-                        .position('right')
-                        .hideDelay(3000)
-                    );
-                  })
-                  .error(function(error) {
-                    $mdToast.show(
-                      $mdToast.simple()
-                        .content('Error al gurdar el practicante: ' + error.message)
-                        .position('right')
-                        .hideDelay(3000)
-                    );
-                  });
-                $location.path('/practicantes/');
-              }
-              $mdDialog.cancel();
+          .find({
+            filter: {
+              include: ['estadoCivil', 'pais']
             }
-          }
-        }
+          })
+          .$promise
+          .then(function(practicantes) {
+            vm.practicantes = practicantes;
+            $log.debug(vm.practicantes);
+          });
+
+        vm.sort = function(keyname){
+          vm.sortKey = keyname;   //set the sortKey to the param passed
+          vm.reverse = !vm.reverse; //if true make it false and vice versa
+        };
   })
-  .controller('NuevoPracticanteCtrl', function ($scope, $rootScope, $mdToast, $location, TipoDocumento, EstadoCivil, Pais, Practicante) {
+  .controller('NuevoPracticanteCtrl', function ($log, $scope, $rootScope, $mdToast, $location, EstadoCivil, Pais, Practicante) {
     
     $scope.estadoCivil = [];
-    $scope.tiposDocumento = [];
     $scope.paises = [];
-
-    TipoDocumento
-      .find()
-      .$promise
-      .then(function(data) {
-        $scope.tiposDocumento = data;
-      });
 
     EstadoCivil
       .find()
@@ -140,29 +70,74 @@ angular.module('juridicaWebApp')
     $scope.crearPracticante = function() {
       if (!$.isEmptyObject($scope.formData)) {
 
-        // call the create function from our service (returns a promise object)
-        Practicante.crear($scope.formData)
-          .success(function() {
-            $mdToast.show(
+        $log.debug($scope.formData);
+        
+        $scope.formData.creado = new Date();
+
+        Practicante
+          .create($scope.formData,
+            function(response) {
+              // success
+              $mdToast.show(
               $mdToast.simple()
                 .content('Creado satisfactoriamente!')
                 .position('right')
                 .hideDelay(3000)
             );
-          })
-          .error(function(error) {
-            $mdToast.show(
+            $location.path('/practicantes');
+            }, function(err) {
+              // error
+              $mdToast.show(
               $mdToast.simple()
-                .content('Error al guardar el practicante: ' + error.message)
-                .position('right')
-                .hideDelay(3000)
-            );
-          });
-
-        $location.path('/practicantes/');
+                  .content('Error al guardar el practicante: ' + err.message)
+                  .position('right')
+                  .hideDelay(3000)
+              );
+            });
       }
     }
 
 
   })
-;
+  .controller('DetallePracticanteCtrl', function ($log, $mdToast, $stateParams, $location, EstadoCivil, Practicante) {
+    var vm = this;
+    vm.estadoCivil = [];
+    vm.practicante = {};
+    vm.editable = false;
+    vm.edad = '';
+
+    EstadoCivil
+      .find()
+      .$promise
+      .then(function(estadoCivil) {
+        vm.estadoCivil = estadoCivil;
+      });
+
+    Practicante.findById({
+        id: $stateParams.id
+      })
+      .$promise
+      .then(function (practicante) {
+        // success
+        vm.practicante = practicante;
+        vm.edad = calculateAge(practicante.fechaNac);
+        $log.debug(vm.edad);
+      }, function (err) {
+        // error
+        $log.error(err);
+      });
+
+      vm.updatePracticante = function () {
+      vm.practicante.actualizado = new Date();
+      vm.practicante.$save();
+      vm.editable = false;
+      $mdToast.show(
+        $mdToast.simple()
+          .content('Datos actualizados')
+          .position('right')
+          .hideDelay(3000)
+      );
+    }
+  });
+
+}());

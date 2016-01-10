@@ -1,39 +1,33 @@
 <div class="ui page">
   <div class="ui segment">
-    <form id="form-usuarios" ng-submit="agregarSolicitud(usuario.id)" class="ui form">
-      <h3 class="ui dividing header">Solicitud de servicios</h3>
+    <form id="form-usuarios" ng-submit="vm.agregarSolicitud(vm.usuario.id)" class="ui form">
+      <h3 class="ui dividing header">Solicitud No: {{vm.number}}</h3>
       <h2 class="ui header" style="padding-bottom: 10px; color: black;">
-          {{ usuario.apellidos }}, {{ usuario.nombres }}
-          <div class="sub header" style="color:grey">{{ usuario.tipoDocumento.nombre }} - {{ usuario.numDocumento }}</div>
+          {{ vm.usuario.nombres +' '+  vm.usuario.apellidos }}
+          <div class="sub header" style="color:grey">{{ vm.usuario.tipoDocumento.nombre }} - {{ vm.usuario.numDocumento }}</div>
       </h2>
-      <div class="two fields">
-        <div class="field">
-        <label>Número de Solicitud</label>
-        <input type="text" name="numero" ng-model="formData.numero" autocomplete="off">
-      </div>
       <div class="field">
         <label>Servicio que solicita</label>
-        <select name="servicio" ng-model="formData.servicioId" class="ui dropdown">
+        <select name="servicio" ng-model="vm.formData.servicioId" class="ui dropdown">
           <option value="">Seleccione</option>
-          <option ng-repeat="servicio in servicios" value="{{ servicio.id }}">{{servicio.nombre}}</option>
+          <option ng-repeat="servicio in vm.servicios | orderBy: 'nombre'" value="{{ servicio.id }}">{{servicio.nombre}}</option>
         </select>
-      </div>
       </div>
       <div class="field">
         <label>Descripcion del problema</label>
-        <textarea type="text" rows="2" name="descripcion" ng-model="formData.descripcionProblema"></textarea>
+        <textarea type="text" rows="2" name="descripcion" ng-model="vm.formData.descripcionProblema"></textarea>
       </div>
       <div class="field">
         <label>Hechos expuestos</label>
-        <textarea type="text" rows="2" name="hechos" ng-model="formData.hechosExpuestos"></textarea>
+        <textarea type="text" rows="2" name="hechos" ng-model="vm.formData.hechosExpuestos"></textarea>
       </div>
       <div class="field">
         <label>Asesoría brindada</label>
-        <textarea type="text" rows="2" name="asesoria" ng-model="formData.asesoriaBrindada"></textarea>
+        <textarea type="text" rows="2" name="asesoria" ng-model="vm.formData.asesoriaBrindada"></textarea>
       </div>
       <div class="field">
         <label>Documentos solicitados</label>
-        <textarea type="text" rows="2" name="documentos" ng-model="formData.docSolicitados"></textarea>
+        <textarea type="text" rows="2" name="documentos" ng-model="vm.formData.docSolicitados"></textarea>
       </div>
       <div class="ui fitted divider"></div>
       <div class="field">

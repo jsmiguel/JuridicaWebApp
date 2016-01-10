@@ -17,34 +17,86 @@
       "mysql": {
         "columnName": "numero_expediente",
         "dataType": "varchar",
-        "dataLength": 10
+        "dataLength": 15
       }
     },
     "fechaCierre": {
       "type": "date"
+    },
+    "observaciones": {
+      "type": "string"
+    },
+    "creado": {
+      "type": "date" 
+    },
+    "actualizado": {
+      "type": "date"
+    },
+    "esActivo": {
+      "type": "boolean"
+    },
+    "asesorId":{
+      "type": "number",
+      "required": true,
+      "mysql": {
+        "dataType": "integer"
+      }
+    },
+    "coordinadorId":{
+      "type": "number",
+      "required": true,
+      "mysql": {
+        "dataType": "integer"
+      }
+    },
+    "solicitudId":{
+      "type": "number",
+      "required": true,
+      "mysql": {
+        "dataType": "integer"
+      }
+    },
+    "practicanteId":{
+      "type": "number",
+      "required": true,
+      "mysql": {
+        "dataType": "integer"
+      }
+    },
+    "areaId":{
+      "type": "number",
+      "required": true,
+      "mysql": {
+        "dataType": "integer"
+      }
     }
   },
   "validations": [],
   "relations": {
     "solicitud": {
       "type": "belongsTo",
-      "model": "Solicitud"
+      "model": "Solicitud",
+      "foreignKey": "solicitudId"
     },
     "asesor": {
       "type": "belongsTo",
-      "model": "Colaborador"
+      "model": "Cuenta",
+      "foreignKey": "asesorId"
     },
     "coordinador": {
       "type": "belongsTo",
-      "model": "Colaborador"
+      "model": "Cuenta",
+      "foreignKey": "coordinadorId"
     },
     "practicante": {
       "type": "belongsTo",
-      "model": "Practicante"
+      "model": "Practicante",
+      "foreignKey": "practicanteId"
     },
     "area": {
       "type": "belongsTo",
-      "model": "Area"
+      "model": "Area",
+      "foreignKey": "areaId"
     },
     "eventos": {
       "type": "hasMany",

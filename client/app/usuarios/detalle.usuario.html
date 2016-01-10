@@ -8,14 +8,10 @@
                     Ir atrás
                   </md-tooltip>
                 </md-button>
-                <!-- <md-button ui-sref="{{previusState}}" aria-label="Anterior">
-                  <md-icon>navigate_before</md-icon>
-                  Atrás
-                </md-button> -->
                 <i class="material-icons">account_box</i>
-                <span style="padding-left:10px;">Usuario #{{usuario.id}}</span>
+                <span style="padding-left:10px; padding-right:10px;">Usuario #{{vm.usuario.id}}</span>
+                <button ng-click="vm.editable = true;" class="ui inverted basic mini button">Editar</button>
                 <div class="mdl-layout-spacer"></div>
-                <!-- <md-button>Nueva solicitud</md-button> -->
                 <md-fab-speed-dial  md-direction="left" md-open="fab.isOpen" class="md-scale" ng-mouseenter="fab.isOpen=true" ng-mouseleave="fab.isOpen=false">
                     <md-fab-trigger>
                       <md-button class="md-fab md-mini">
@@ -23,14 +19,14 @@
                       </md-button>
                     </md-fab-trigger>
                     <md-fab-actions>
-                      <md-button ui-sref="nuevaSolicitud({ id: usuario.id })" class="md-fab md-mini">
+                      <md-button ui-sref="nuevaSolicitud({ id: vm.usuario.id })" class="md-fab md-mini">
                         <md-tooltip md-direction="down">Nueva solicitud</md-tooltip>
                         <md-icon>assignment</md-icon>
                       </md-button>
-                      <md-button class="md-fab md-mini" ng-click="print('usuarios', usuario.id)">
+                      <!-- <md-button class="md-fab md-mini" ng-click="print('usuarios', vm.usuario.id)">
                         <md-tooltip md-direction="down">Imprimir detalle</md-tooltip>
                         <md-icon>print</md-icon>
-                      </md-button>
+                      </md-button> -->
                     </md-fab-actions>
                 </md-fab-speed-dial>
             </div>
@@ -43,49 +39,53 @@
                     <div layout layout-sm="column">
                         <md-input-container flex>
                           <label>Nombres</label>
-                          <input ng-model="usuario.nombres" type="text" readonly>
+                          <input autocomplete="off" ng-model="vm.usuario.nombres" type="text" ng-readonly="!vm.editable">
                         </md-input-container>
                         <md-input-container flex>
                           <label>Apellidos</label>
-                          <input ng-model="usuario.apellidos" type="text" readonly>
+                          <input autocomplete="off" ng-model="vm.usuario.apellidos" type="text" ng-readonly="!vm.editable">
                         </md-input-container>
                         <md-input-container>
                           <label>Género</label>
-                          <input ng-model="usuario.genero" readonly>
+                          <input ng-model="vm.usuario.genero" readonly>
                         </md-input-container>
                     </div>
                     <div layout layout-sm="column">
                         <md-input-container flex>
-                          <label>{{ usuario.tipoDocumento.nombre }}</label>
-                          <input ng-model="usuario.numDocumento" type="text" readonly>
+                          <label>{{ vm.tipoDocumento }}</label>
+                          <input autocomplete="off" ng-model="vm.usuario.numDocumento" type="text" ng-readonly="!vm.editable">
                         </md-input-container>
                         <md-input-container>
                           <label>Profesión</label>
-                          <input ng-model="usuario.profesion" readonly>
+                          <input autocomplete="off" ng-model="vm.usuario.profesion" ng-readonly="!vm.editable">
                         </md-input-container>
-                        <!-- <md-datepicker ng-model="usuario.fechaNac" md-placeholder="mm/dd/aaaa"></md-datepicker> -->
                     </div> 
-                    <!-- <md-subheader>Información de contacto</md-subheader> -->
                     <h3 class="ui dividing header">Información de contacto</h3>
                     <div layout layout-sm="column">
                         <md-input-container flex>
                           <label>Dirección</label>
-                          <input ng-model="usuario.direccion" type="text" readonly>
+                          <input autocomplete="off" ng-model="vm.usuario.direccion" type="text" ng-readonly="!vm.editable">
                         </md-input-container>
                         <md-input-container>
                           <label>Teléfono fijo</label>
-                          <input ng-model="usuario.telefono" readonly>
+                          <input autocomplete="off" ng-model="vm.usuario.telefono" ng-readonly="!vm.editable">
                         </md-input-container>
                         <md-input-container>
                           <label>Teléfono móvil</label>
-                          <input ng-model="usuario.movil" readonly>
+                          <input autocomplete="off" ng-model="vm.usuario.movil" ng-readonly="!vm.editable">
                         </md-input-container>
                     </div> 
                 </form>  
             </md-content>
+            <span>Última actualización: {{vm.usuario.actualizado ? vm.usuario.actualizado : vm.usuario.creado | date : 'dd/MM/yyyy'}}</span>
         </md-card-content>
-        <md-card-footer>
-        Última actualización: {{usuario.updatedAt | date : 'dd/MM/yyyy'}}
+        <md-card-footer ng-if="vm.editable" layout="row" layout-align="end center">
+          <md-button ng-click="vm.editable = false;">
+            Cancelar
+          </md-button>
+          <md-button ng-click="vm.updateUsuario()" style="margin-right:20px;">
+            Guardar
+          </md-button>
         </md-card-footer>
     </md-card>
 </div>
