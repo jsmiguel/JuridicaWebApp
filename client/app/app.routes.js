@@ -92,7 +92,12 @@
 		    	url: '/solicitudes/detalle/:id',
 		        templateUrl: './app/solicitudes/detalle.solicitud.html',
 		        controller: 'DetalleSolicitudCtrl',
-		        controllerAs: 'vm'
+		        controllerAs: 'vm',
+		        resolve : {
+	        		loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load('detalleSolicitud');
+                                }]
+	        	}
 		    })
 		    .state('nuevaSolicitud', {
 		    	url: '/solicitudes/form/:id',

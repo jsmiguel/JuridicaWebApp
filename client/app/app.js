@@ -5,9 +5,9 @@
   angular.module('juridicaWebApp', ['ngMaterial','ui.router','juridicaServices','oc.lazyLoad'])
 
   //.constant('API_URL', 'http://api.jsmiguel.com')
-  .constant('API_URL', 'http://localhost/api:3000')
+  .constant('API_URL', '/api')
 
-  .config(function ($urlRouterProvider, $locationProvider, $mdThemingProvider, $logProvider, API_URL) {
+  .config(function ($urlRouterProvider, $locationProvider, $mdThemingProvider, $logProvider, API_URL, LoopBackResourceProvider) {
 
       LoopBackResourceProvider.setUrlBase(API_URL);
 
@@ -17,22 +17,29 @@
       $urlRouterProvider.otherwise('/');
 
       // use the HTML5 History API
-      $locationProvider.html5Mode(true);
+      //$locationProvider.html5Mode(true);
 
       $mdThemingProvider.theme('default')
         .primaryPalette('grey')
         .accentPalette('red');
 
     })
-    .run(function ($rootScope, $state, $location, $window, Cuenta) {
+    .run(function ($rootScope, $state, $location, $window, Cuenta, LoopBackAuth) {
 
       function init() {
         
         $rootScope.authenticated = Cuenta.isAuthenticated();
-        
-        if ($window.sessionStorage["account"]) {
-          $rootScope.account = JSON.parse($window.sessionStorage["account"]);
+
+        if (localStorage.getItem('account')) {
+          $rootScope.account = JSON.parse(localStorage.getItem('account'));
         }
+        if (LoopBackAuth.accessTokenId) {
+          $rootScope.token = LoopBackAuth.accessTokenId;
+        }
+        
+        /*if ($window.sessionStorage["account"]) {
+          $rootScope.account = JSON.parse($window.sessionStorage["account"]);
+        }*/
 
         //$rootScope.account = JSON.parse($window.sessionStorage["account"]) || '';
         //$rootScope.authenticated = JSON.parse($window.sessionStorage["authenticated"]) == "true" ? true : false;
@@ -43,7 +50,8 @@
       init();
 
       $rootScope.logOut = function () {
-        Cuenta
+        if (LoopBackAuth.accessTokenId) {
+          Cuenta
           .logout({
             id: $rootScope.token
           })
@@ -51,10 +59,10 @@
           .then(function(response) {
             $location.path('/login');
           });
-
+        }
         // Remove the authenticated user from local storage
         localStorage.clear();
-        $window.sessionStorage.clear();
+        //$window.sessionStorage.clear();
 
         // Flip authenticated to false so that we no longer
         // show UI elements dependant on the user being logged in

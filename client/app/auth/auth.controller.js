@@ -42,9 +42,10 @@
             $rootScope.token = token.id;
             $rootScope.authenticated = true;
 
-            //localStorage.setItem('account', JSON.stringify(token.user));
-            $window.sessionStorage["account"] = JSON.stringify(token.user);
-            $window.sessionStorage["token"] = token.id;
+            localStorage.setItem('account', JSON.stringify(token.user));
+            //localStorage.setItem('token',token.id);
+            //$window.sessionStorage["account"] = JSON.stringify(token.user);
+            //$window.sessionStorage["token"] = token.id;
 
             $location.nextAfterLogin = null;
             $location.path(next);

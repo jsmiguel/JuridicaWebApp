@@ -15,4 +15,4 @@ module.exports = function(app) {
     res.send('PDF Usuario: ' + req.params.id);
   });
   app.use(router);
-}
+};

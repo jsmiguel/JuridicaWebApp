@@ -10,25 +10,30 @@
                 </md-button>
                 <i class="material-icons">account_box</i>
                 <span style="padding-left:10px; padding-right:10px;">Usuario #{{vm.usuario.id}}</span>
-                <button ng-click="vm.editable = true;" class="ui inverted basic mini button">Editar</button>
                 <div class="mdl-layout-spacer"></div>
-                <md-fab-speed-dial  md-direction="left" md-open="fab.isOpen" class="md-scale" ng-mouseenter="fab.isOpen=true" ng-mouseleave="fab.isOpen=false">
-                    <md-fab-trigger>
-                      <md-button class="md-fab md-mini">
-                        <md-icon>menu</md-icon>
+                <md-menu md-position-mode="target-right target" >
+                  <md-button aria-label="Opciones" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                    <md-icon md-menu-origin>more_vert</md-icon>
+                  </md-button>
+                  <md-menu-content width="3" >
+                    <md-menu-item ui-sref="nuevaSolicitud({ id: vm.usuario.id })">
+                      <md-button>
+                          <div layout="row">
+                            <p flex>Nueva solicitud</p>
+                            <md-icon md-menu-align-target style="margin: auto 3px auto 0;">assignment</md-icon>
+                          </div>
                       </md-button>
-                    </md-fab-trigger>
-                    <md-fab-actions>
-                      <md-button ui-sref="nuevaSolicitud({ id: vm.usuario.id })" class="md-fab md-mini">
-                        <md-tooltip md-direction="down">Nueva solicitud</md-tooltip>
-                        <md-icon>assignment</md-icon>
+                    </md-menu-item>
+                    <md-menu-item >
+                      <md-button ng-click="vm.editable = true;">
+                          <div layout="row">
+                            <p flex>Editar Usuario</p>
+                            <md-icon md-menu-align-target style="margin: auto 3px auto 0;">create</md-icon>
+                          </div>
                       </md-button>
-                      <!-- <md-button class="md-fab md-mini" ng-click="print('usuarios', vm.usuario.id)">
-                        <md-tooltip md-direction="down">Imprimir detalle</md-tooltip>
-                        <md-icon>print</md-icon>
-                      </md-button> -->
-                    </md-fab-actions>
-                </md-fab-speed-dial>
+                    </md-menu-item>
+                  </md-menu-content>
+                </md-menu>
             </div>
         </md-toolbar>
         <md-card-content>

@@ -39,7 +39,7 @@
                     {
                       name: 'solicitudes',
                       files: [
-                        './app/solicitudes/solicitudes.controller.js'
+                        './app/solicitudes/solicitudes.controller.js',
                       ],
                       cache: false
                     },
@@ -47,6 +47,14 @@
                       name: 'nuevaSolicitud',
                       files: [
                         './app/solicitudes/solicitudes.controller.js'
+                      ],
+                      cache: false
+                    },
+                    {
+                      name: 'detalleSolicitud',
+                      files: [
+                        './app/solicitudes/solicitudes.controller.js',
+                        './app/expedientes/expedientes.controller.js'
                       ],
                       cache: false
                     },
