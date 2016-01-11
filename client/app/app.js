@@ -4,12 +4,9 @@
 
   angular.module('juridicaWebApp', ['ngMaterial','ui.router','juridicaServices','oc.lazyLoad'])
 
-  //.constant('API_URL', 'http://api.jsmiguel.com')
-  .constant('API_URL', '/api')
+  .config(function ($urlRouterProvider, $locationProvider, $mdThemingProvider, $logProvider, LoopBackResourceProvider) {
 
-  .config(function ($urlRouterProvider, $locationProvider, $mdThemingProvider, $logProvider, API_URL, LoopBackResourceProvider) {
-
-      LoopBackResourceProvider.setUrlBase(API_URL);
+      LoopBackResourceProvider.setUrlBase('/api');
 
       // Enable log
       $logProvider.debugEnabled(true);
@@ -24,7 +21,7 @@
         .accentPalette('red');
 
     })
-    .run(function ($rootScope, $state, $location, $window, Cuenta, LoopBackAuth) {
+    .run(function ($rootScope, $state, $log, $location, $window, Cuenta, LoopBackAuth) {
 
       function init() {
         
@@ -92,7 +89,14 @@
       $rootScope.$on('$stateChangeStart', 
       function(event, toState, toParams, fromState, fromParams){
 
-          $rootScope.previusState = fromState.name;
+          if (fromParams.id) {
+            $rootScope.previusState = fromState.name+'({id: '+fromParams.id+'})';
+          } else{
+            $rootScope.previusState = fromState.name;
+          };
+
+          $log.debug('State', $rootScope.previusState);
+
 
           if (!$rootScope.authenticated) {
             // redirect back to login
