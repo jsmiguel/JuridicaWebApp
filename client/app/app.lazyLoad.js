@@ -76,7 +76,7 @@
                     {
                       name: 'detalleExpediente',
                       files: [
-                        './app/print.service.js'
+                        './app/practicantes/practicantes.controller.js'
                       ],
                       cache: false
                     },
