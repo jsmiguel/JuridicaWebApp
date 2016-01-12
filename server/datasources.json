@@ -9,6 +9,6 @@
     "password": "",
     "name": "mysqlds",
     "connector": "mysql",
-    "user": "root"
+    "user": "juridica"
   }
 }

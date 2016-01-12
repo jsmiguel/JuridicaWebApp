@@ -154,7 +154,7 @@ $('#form-usuarios')
   .form({
     inline : true,
     on     : 'blur',
-    fields: fields
+    fields: fieldsUsuarioForm
 });
 
 console.log($('#form-usuarios').form('get value', 'year'));
