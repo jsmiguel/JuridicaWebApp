@@ -14,7 +14,7 @@
                 <span style="margin-left:10px;" ng-if="vm.expediente.esActivo == false" class="ui horizontal label">Cerrado</span>
                 <div class="mdl-layout-spacer"></div>
                 <!-- <md-button>Nueva solicitud</md-button> -->
-                <md-menu md-position-mode="target-right target" >
+                <md-menu md-position-mode="target-right target" ng-if="vm.expediente.esActivo">
                   <md-button aria-label="Opciones" class="md-icon-button" ng-click="$mdOpenMenu($event)">
                     <md-icon md-menu-origin>more_vert</md-icon>
                   </md-button>
@@ -53,6 +53,10 @@
                   <md-input-container>
                     <label>Documentos solicitados</label>
                     <input readonly="true" ng-model="vm.expediente.solicitud.docSolicitados">
+                  </md-input-container>
+                  <md-input-container ng-if="vm.expediente.esActivo == false">
+                    <label>Observaciones</label>
+                    <textarea readonly="true" ng-model="vm.expediente.observaciones" columns="1"></textarea>
                   </md-input-container>
               </div>
               <a class="ui basic grey large label" ui-sref="detallePracticante({ id: vm.expediente.practicanteId })">

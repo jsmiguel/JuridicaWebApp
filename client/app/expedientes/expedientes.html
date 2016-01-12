@@ -12,8 +12,9 @@
                 <th>Solicitud N°</th>
         		<th>Practicante</th>
                 <th>Asesor</th> 
-        		<th>Descripción</th>
-                <th>Fecha</th>
+        		<th>Servicio</th>
+                <th>Fecha Apertura</th>
+                <th>Fecha cierre</th>
                 <th>Estado</th>
                 <th>Opciones</th>
         	</tr>
@@ -39,6 +40,9 @@
                     {{expediente.creado | date : 'dd/MM/yyyy'}}
                 </td>
                 <td>
+                    {{expediente.fechaCierre | date : 'dd/MM/yyyy'}}
+                </td>
+                <td>
                     <div ng-if="expediente.esActivo" class="ui blue horizontal label">Activo</div>
                     <div ng-if="expediente.esActivo == false" class="ui horizontal label">Cerrado</div>
                 </td>
@@ -53,7 +57,7 @@
         </tbody>
         <tfoot class="full-width">
             <tr>
-              <th colspan="8"
+              <th colspan="9"
                  <div class="ui">
                   Total de registros: {{ vm.expedientes.length }}
                 </div> 

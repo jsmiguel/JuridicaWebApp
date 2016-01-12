@@ -95,7 +95,7 @@
             $rootScope.previusState = fromState.name;
           };
 
-          $log.debug('State', $rootScope.previusState);
+          //$log.debug('State', $rootScope.previusState);
 
 
           if (!$rootScope.authenticated) {

@@ -53,6 +53,7 @@
         });
         function CloseFormController($location, $mdDialog, $mdToast, $log, $state, $stateParams, Expediente) {
           var vm = this;
+          vm.observaciones = '';
 
           vm.cerrar = function() {
             $mdDialog.hide();
@@ -65,13 +66,13 @@
 
           vm.procesar = function ($event) {
             $event.preventDefault();
-            if (!$.isEmptyObject(vm.formData)) {
+            if (vm.observaciones.length > 0) {
               
               Expediente.prototype$updateAttributes(
                 { id: expedienteId }, 
                 { 
                   esActivo: false,
-                  observaciones,
+                  observaciones: vm.observaciones,
                   fechaCierre: new Date()
                 });
 
@@ -81,7 +82,7 @@
                 .position('right')
                 .hideDelay(3000));
 
-              vm.cerrar();
+              $mdDialog.cancel();
 
               $state.transitionTo($state.current, $stateParams, {
                   reload: true,
