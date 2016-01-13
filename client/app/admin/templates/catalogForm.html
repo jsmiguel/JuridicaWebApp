@@ -1,0 +1,54 @@
+<md-dialog aria-label="Agregar {{formCtrl.catalog}}">
+    <md-toolbar class="md-primary md-hue-2">
+      <div class="md-toolbar-tools white-text">
+        <h2>Agregar {{formCtrl.catalog}}</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="formCtrl.cerrar()">
+          <md-icon style="color: white" aria-label="Cerrar diálogo">close</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <form id="form-catalog" class="ui form" ng-submit="formCtrl.procesar($event)">
+      <md-dialog-content style="width:450px;" flex layout-padding>
+        <div>            
+            <div class="field">
+                <input name="nombre" autocomplete="off" ng-model="formCtrl.nombre" placeholder="Nombre" type="text">
+            </div>
+        </div>
+      </md-dialog-content>
+      <div class="md-actions" layout="row">
+        <md-button ng-click="formCtrl.cancelar()">
+          Cancelar
+        </md-button>
+        <md-button type="submit" style="margin-right:20px;">
+          Guardar
+        </md-button>
+      </div>
+    </form>
+</md-dialog>
+
+<script>
+    //validaciones del formulario     
+  $('#form-catalog')
+    .form({
+      fields: {
+          nombre: {
+              identifier : 'nombre',
+              rules: [
+              {
+                  type   : 'empty',
+                  prompt : 'Por favor introduzca el nombre'
+              },
+              {
+                type:'regExp[/^([A-Za-z])$/]',
+                prompt : 'Introduzca sólo letras'
+              }]
+          }
+      },
+      inline : false,
+      on     : 'blur'
+    })
+  ;
+</script>
+
+

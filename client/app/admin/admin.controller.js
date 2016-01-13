@@ -3,7 +3,7 @@
 (function () {
 
   angular.module('juridicaWebApp')
-  .controller('AdminCtrl', function ($scope, $location, $mdDialog, Colaborador, TipoDocumento, Servicio, Cuenta) {
+  .controller('AdminCtrl', function ($scope, $location, $mdDialog, Colaborador, TipoDocumento, Servicio, Motivo, Cuenta) {
     var vm = this;
 
     $scope.asesores = [];
@@ -11,6 +11,7 @@
     $scope.cuentas = [];
     $scope.tiposDocumento = [];
     $scope.servicios = [];
+    $scope.motivos = [];
 
 
     TipoDocumento
@@ -25,6 +26,13 @@
         .$promise
         .then(function(data) {
           $scope.servicios = data;
+        });
+
+    Motivo
+        .find()
+        .$promise
+        .then(function(data) {
+          $scope.motivos = data;
         });
     
     Cuenta
@@ -75,7 +83,7 @@
       $mdDialog.show({
         parent: parentEl,
         targetEvent: $event,
-        templateUrl:'./app/admin/colaboradorForm.html',
+        templateUrl:'./app/admin/templates/colaboradorForm.html',
         controller: ColaboradorFormController,
         controllerAs: 'formCtrl',
         clickOutsideToClose: true
@@ -188,6 +196,192 @@
             
           }
           return false;
+        }        
+      }
+    }
+
+    vm.addDocumento = function ($event) {
+      $event.preventDefault();
+      var parentEl = angular.element(document.body);
+
+      $mdDialog.show({
+        parent: parentEl,
+        targetEvent: $event,
+        templateUrl:'./app/admin/templates/catalogForm.html',
+        controller: DocumentoFormController,
+        controllerAs: 'formCtrl',
+        clickOutsideToClose: true
+      });
+
+      function DocumentoFormController ($mdDialog, $mdToast, $log, $state, $stateParams, TipoDocumento) {
+        var vm = this;
+        vm.catalog = 'Tipo de Documento';
+        vm.nombre = '';
+
+        vm.cerrar = function() {
+          $mdDialog.hide();
+          return;
+        };
+        vm.cancelar = function() {
+          $mdDialog.cancel();
+          return;
+        };
+        vm.procesar = function() {
+          if (vm.nombre) {
+            TipoDocumento.create({
+              nombre: vm.nombre,
+              esActivo: true
+            })
+            .$promise
+            .then(function (respose) {
+              // Success
+              $mdToast.show(
+                $mdToast.simple()
+                .content('Creado satisfactoriamente!')
+                .position('right')
+                .hideDelay(3000));
+
+              vm.cerrar();
+
+              $state.transitionTo($state.current, $stateParams, {
+                  reload: true,
+                  inherit: false,
+                  notify: true
+              });
+            }, function (err) {
+              // Error
+              $mdToast.show(
+              $mdToast.simple()
+                  .content('Error al guardar Documento')
+                  .position('right')
+                  .hideDelay(3000)
+              );
+            });
+          }
+        }
+      }
+    }
+
+    vm.addServicio = function ($event) {
+      $event.preventDefault();
+      var parentEl = angular.element(document.body);
+
+      $mdDialog.show({
+        parent: parentEl,
+        targetEvent: $event,
+        templateUrl:'./app/admin/templates/catalogForm.html',
+        controller: ServicioFormController,
+        controllerAs: 'formCtrl',
+        clickOutsideToClose: true
+      });
+
+      function ServicioFormController ($mdDialog, $mdToast, $log, $state, $stateParams, Servicio) {
+        var vm = this;
+        vm.catalog = 'Servicio';
+        vm.nombre = '';
+
+        vm.cerrar = function() {
+          $mdDialog.hide();
+          return;
+        };
+        vm.cancelar = function() {
+          $mdDialog.cancel();
+          return;
+        };
+        vm.procesar = function() {
+          if (vm.nombre) {
+            Servicio.create({
+              nombre: vm.nombre,
+              esActivo: true
+            })
+            .$promise
+            .then(function (respose) {
+              // Success
+              $mdToast.show(
+                $mdToast.simple()
+                .content('Creado satisfactoriamente!')
+                .position('right')
+                .hideDelay(3000));
+
+              vm.cerrar();
+
+              $state.transitionTo($state.current, $stateParams, {
+                  reload: true,
+                  inherit: false,
+                  notify: true
+              });
+            }, function (err) {
+              // Error
+              $mdToast.show(
+              $mdToast.simple()
+                  .content('Error al guardar Servicio')
+                  .position('right')
+                  .hideDelay(3000)
+              );
+            });
+          }
+        }
+      }
+    }
+
+    vm.addMotivo = function ($event) {
+      $event.preventDefault();
+      var parentEl = angular.element(document.body);
+
+      $mdDialog.show({
+        parent: parentEl,
+        targetEvent: $event,
+        templateUrl:'./app/admin/templates/catalogForm.html',
+        controller: MotivoFormController,
+        controllerAs: 'formCtrl',
+        clickOutsideToClose: true
+      });
+
+      function MotivoFormController ($mdDialog, $mdToast, $log, $state, $stateParams, Motivo) {
+        var vm = this;
+        vm.catalog = 'Motivo';
+        vm.nombre = '';
+
+        vm.cerrar = function() {
+          $mdDialog.hide();
+          return;
+        };
+        vm.cancelar = function() {
+          $mdDialog.cancel();
+          return;
+        };
+        vm.procesar = function() {
+          if (vm.nombre) {
+            Motivo.create({
+              nombre: vm.nombre,
+              esActivo: true
+            })
+            .$promise
+            .then(function (respose) {
+              // Success
+              $mdToast.show(
+                $mdToast.simple()
+                .content('Creado satisfactoriamente!')
+                .position('right')
+                .hideDelay(3000));
+
+              vm.cerrar();
+
+              $state.transitionTo($state.current, $stateParams, {
+                  reload: true,
+                  inherit: false,
+                  notify: true
+              });
+            }, function (err) {
+              // Error
+              $mdToast.show(
+              $mdToast.simple()
+                  .content('Error al guardar Motivo')
+                  .position('right')
+                  .hideDelay(3000)
+              );
+            });
+          }
         }
       }
     }

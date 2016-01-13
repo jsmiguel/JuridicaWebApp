@@ -161,7 +161,7 @@
                         </table>
                     </md-card-content>
                     <md-card-actions layout="row" layout-align="end center">
-                      <md-button>Agregar</md-button>
+                      <md-button ng-click="vm.addDocumento($event)">Agregar</md-button>
                     </md-card-actions>
                 </md-card>
                 <md-card class="md-padding">
@@ -189,7 +189,35 @@
                         </table>
                     </md-card-content>
                     <md-card-actions layout="row" layout-align="end center">
-                      <md-button>Agregar</md-button>
+                      <md-button ng-click="vm.addServicio($event)">Agregar</md-button>
+                    </md-card-actions>
+                </md-card>
+                <md-card class="md-padding">
+                    <md-card-header>
+                      <md-card-header-text>
+                        <md-icon>bookmark</md-icon>
+                        <span class="ui header md-title">Motivos de rechazo</span>
+                      </md-card-header-text>
+                    </md-card-header>
+                    <md-card-content>
+                      <table class="ui very basic single line table">
+                            <tbody>
+                                <tr ng-repeat="item in motivos">
+                                  <td>{{item.nombre}}</td>
+                                  <td class="right aligned">
+                                    <button 
+                                        class="ui mini button"
+                                        ng-class="{true:'positive', false:''}[item.esActivo]"
+                                        ng-click="vm.changeStatus(item);">
+                                        {{item.esActivo ? 'Activo' : 'Inactivo'}}
+                                    </button>
+                                  </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </md-card-content>
+                    <md-card-actions layout="row" layout-align="end center">
+                      <md-button ng-click="vm.addMotivo($event)">Agregar</md-button>
                     </md-card-actions>
                 </md-card>
             </div>
