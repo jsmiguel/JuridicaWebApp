@@ -21,17 +21,14 @@
         .accentPalette('red');
 
     })
-    .run(function ($rootScope, $state, $log, $location, $window, Cuenta, LoopBackAuth) {
+    .run(function ($rootScope, $state, $log, $location, $window, Cuenta, LoopBackAuth, Utilities) {
 
-      function init() {
-        
+      function init() {        
         $rootScope.authenticated = Cuenta.isAuthenticated();
 
         if (localStorage.getItem('account')) {
           $rootScope.account = JSON.parse(localStorage.getItem('account'));
-        }
-        if (LoopBackAuth.accessTokenId) {
-          $rootScope.token = LoopBackAuth.accessTokenId;
+          $rootScope.isAdmin = Utilities.isAuthorizedUser($rootScope.account.rolId);
         }
         
         /*if ($window.sessionStorage["account"]) {
@@ -50,7 +47,7 @@
         if (LoopBackAuth.accessTokenId) {
           Cuenta
           .logout({
-            id: $rootScope.token
+            id: LoopBackAuth.accessTokenId
           })
           .$promise
           .then(function(response) {

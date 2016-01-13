@@ -21,6 +21,7 @@
 	    <!-- Dependencies -->
 	    <script	src="libs/jquery/dist/jquery.min.js"></script>
 	    <script	src="libs/angular/angular.min.js"></script>
+	    <script	src="libs/underscore/underscore-min.js"></script>
 	    <script	src="libs/angular-resource/angular-resource.min.js"></script>
 		<script	src="libs/angular-ui-router/release/angular-ui-router.min.js"></script>
 		<script src="libs/oclazyload/dist/ocLazyLoad.min.js"></script>
@@ -38,6 +39,7 @@
 		<script	src="app/app.lazyLoad.js"></script>
 		<script	src="app/app.routes.js"></script>
 		<script	src="app/app.services.js"></script>
+		<script	src="app/app.utilities.js"></script>
 		<script	src="app/app.directive.js"></script>
 		<!-- End Sources -->
 
@@ -94,7 +96,7 @@
 					    <i role="presentation" class="material-icons">perm_contact_calendar</i>
 					    <label>Usuarios</label>
 				    </a>
-				    <a ui-sref="admin" ui-sref-active="active-nav" class="mdl-navigation__link">
+				    <a ui-sref="admin" ui-sref-active="active-nav" ng-if="isAdmin" class="mdl-navigation__link">
 					    <i role="presentation" class="material-icons">settings</i>
 					    <label>Administrar</label>
 				    </a>

@@ -3,9 +3,7 @@
 (function(){
     
   angular.module('juridicaWebApp')
-  .controller('AuthCtrl', function ($scope, $rootScope, $mdToast, $location, $window, Cuenta) {
-
-    $rootScope.logOut();
+  .controller('AuthCtrl', function ($scope, $rootScope, $mdToast, $location, $window, Cuenta, Utilities) {
 
     $scope.logIn = function ($event) {
       $event.preventDefault();
@@ -39,8 +37,8 @@
             // Set the stringified user data into local storage         
 
             $rootScope.account = token.user;
-            $rootScope.token = token.id;
             $rootScope.authenticated = true;
+            $rootScope.isAdmin = Utilities.isAuthorizedUser(token.user.rolId);
 
             localStorage.setItem('account', JSON.stringify(token.user));
             //localStorage.setItem('token',token.id);

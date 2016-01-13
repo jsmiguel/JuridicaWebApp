@@ -27,6 +27,7 @@
     "angular-material": "0.11.3",
     "angular-ui-router": "~0.2.15",
     "material-design-iconfont": "~0.0.2",
-    "angular-resource": "~1.4.8"
+    "angular-resource": "~1.4.8",
+    "underscore": "~1.8.3"
   }
 }
